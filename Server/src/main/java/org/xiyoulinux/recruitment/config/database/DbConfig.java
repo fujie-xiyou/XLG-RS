@@ -1,10 +1,8 @@
-package Recruitment_System.config.database;
+package org.xiyoulinux.recruitment.config.database;
 
 import org.apache.commons.dbcp2.BasicDataSource;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
-import org.springframework.jdbc.core.JdbcOperations;
-import org.springframework.jdbc.core.JdbcTemplate;
 
 import javax.sql.DataSource;
 import java.util.ResourceBundle;

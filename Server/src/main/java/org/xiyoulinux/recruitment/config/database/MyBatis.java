@@ -1,4 +1,4 @@
-package Recruitment_System.config.database;
+package org.xiyoulinux.recruitment.config.database;
 
 import org.mybatis.spring.SqlSessionFactoryBean;
 import org.mybatis.spring.mapper.MapperScannerConfigurer;
@@ -23,7 +23,7 @@ public class MyBatis {
     @Bean
     public MapperScannerConfigurer mapperScannerConfigurer(SqlSessionFactoryBean sfb){
         MapperScannerConfigurer mapperScannerConfigurer = new MapperScannerConfigurer();
-        mapperScannerConfigurer.setBasePackage("Recruitment_System.dao");
+        mapperScannerConfigurer.setBasePackage("org.xiyoulinux.recruitment.dao");
         mapperScannerConfigurer.setSqlSessionFactoryBeanName("sfb");
         return mapperScannerConfigurer;
     }

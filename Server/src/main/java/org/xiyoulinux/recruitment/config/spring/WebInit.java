@@ -1,4 +1,4 @@
-package Recruitment_System.config.spring;
+package org.xiyoulinux.recruitment.config.spring;
 
 import org.springframework.web.servlet.support.AbstractAnnotationConfigDispatcherServletInitializer;
 
