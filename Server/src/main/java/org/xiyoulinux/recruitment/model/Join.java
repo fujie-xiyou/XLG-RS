@@ -1,9 +1,10 @@
-package model;
+package org.xiyoulinux.recruitment.model;
 
-import model.enums.SEX;
+import org.xiyoulinux.recruitment.model.enums.SEX;
+import org.apache.ibatis.type.Alias;
 
 import java.util.Date;
-
+@Alias("Join")
 public class Join {
     private int joinId; // 报名编号
     private String Sno; // 学号
