@@ -1,4 +1,4 @@
-package Recruitment_System.web;
+package org.xiyoulinux.recruitment.web;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;

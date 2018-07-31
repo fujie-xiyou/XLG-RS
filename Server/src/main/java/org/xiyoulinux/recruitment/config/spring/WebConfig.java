@@ -1,4 +1,4 @@
-package Recruitment_System.config.spring;
+package org.xiyoulinux.recruitment.config.spring;
 
 import com.alibaba.fastjson.serializer.SerializerFeature;
 import com.alibaba.fastjson.support.config.FastJsonConfig;
@@ -18,7 +18,7 @@ import java.util.List;
 
 //配置DispatcherServlet应用上下文的JavaConfig
 @Configuration
-@ComponentScan("Recruitment_System.web") //启用组件扫描, 组件扫描只会扫描到这里设置的包及其子包
+@ComponentScan("org.xiyoulinux.recruitment.web") //启用组件扫描, 组件扫描只会扫描到这里设置的包及其子包
 public class WebConfig extends WebMvcConfigurationSupport {
     //配置ViewResolver视图解析器具体解析view名字的规则
     @Bean
