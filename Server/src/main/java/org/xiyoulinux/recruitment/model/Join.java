@@ -1,126 +1,135 @@
 package org.xiyoulinux.recruitment.model;
 
-import org.xiyoulinux.recruitment.model.enums.SEX;
-import org.apache.ibatis.type.Alias;
-
 import java.util.Date;
-@Alias("Join")
-public class Join {
-    private int joinId; // 报名编号
-    private String Sno; // 学号
-    private int processID; // 流程编号
-    private boolean isVaild; // false代表被淘汰
-    private String Sname; // 姓名
-    private String Spasswd; // 教务系统密码
-    private SEX Ssex;
-    private Date Sbirthday;
-    private String Sprovince; // 省份
-    private String Scoll; // 学院
-    private String Sdept; // 专业名称
-    private String Sclass; // 行政班
-    private String Sphone; // 手机号
 
-    public int getJoinId() {
-        return joinId;
+public class Join {
+    private Integer joinID;
+
+    private String sno;
+
+    private Integer processID;
+
+    private Boolean is_vaild;
+
+    private String sname;
+
+    private String spasswd;
+
+    private String ssex;
+
+    private Date sbirthday;
+
+    private String sprovince;
+
+    private String scoll;
+
+    private String sdept;
+
+    private String sclass;
+
+    private String sphone;
+
+    public Integer getJoinID() {
+        return joinID;
     }
 
-    public void setJoinId(int joinId) {
-        this.joinId = joinId;
+    public void setJoinID(Integer joinID) {
+        this.joinID = joinID;
     }
 
     public String getSno() {
-        return Sno;
+        return sno;
     }
 
     public void setSno(String sno) {
-        Sno = sno;
+        this.sno = sno;
     }
 
-    public int getProcessID() {
+    public Integer getProcessID() {
         return processID;
     }
 
-    public void setProcessID(int processID) {
+    public void setProcessID(Integer processID) {
         this.processID = processID;
     }
 
-    public boolean isVaild() {
-        return isVaild;
+    public Boolean getIs_vaild() {
+        return is_vaild;
     }
 
-    public void setVaild(boolean vaild) {
-        isVaild = vaild;
+    public void setIs_vaild(Boolean is_vaild) {
+        this.is_vaild = is_vaild;
     }
 
     public String getSname() {
-        return Sname;
+        return sname;
     }
 
     public void setSname(String sname) {
-        Sname = sname;
+        this.sname = sname;
     }
 
     public String getSpasswd() {
-        return Spasswd;
+        return spasswd;
     }
 
     public void setSpasswd(String spasswd) {
-        Spasswd = spasswd;
+        this.spasswd = spasswd;
     }
 
-    public SEX getSsex() {
-        return Ssex;
+    public String getSsex() {
+        return ssex;
     }
 
-    public void setSsex(SEX ssex) {
-        Ssex = ssex;
+    public void setSsex(String ssex) {
+        this.ssex = ssex;
     }
 
     public Date getSbirthday() {
-        return Sbirthday;
+        return sbirthday;
     }
 
     public void setSbirthday(Date sbirthday) {
-        Sbirthday = sbirthday;
+        this.sbirthday = sbirthday;
     }
 
     public String getSprovince() {
-        return Sprovince;
+        return sprovince;
     }
 
     public void setSprovince(String sprovince) {
-        Sprovince = sprovince;
+        this.sprovince = sprovince;
     }
 
     public String getScoll() {
-        return Scoll;
+        return scoll;
     }
 
     public void setScoll(String scoll) {
-        Scoll = scoll;
+        this.scoll = scoll;
     }
 
     public String getSdept() {
-        return Sdept;
+        return sdept;
     }
 
     public void setSdept(String sdept) {
-        Sdept = sdept;
+        this.sdept = sdept;
     }
 
     public String getSclass() {
-        return Sclass;
+        return sclass;
     }
 
     public void setSclass(String sclass) {
-        Sclass = sclass;
+        this.sclass = sclass;
     }
 
     public String getSphone() {
-        return Sphone;
+        return sphone;
     }
 
     public void setSphone(String sphone) {
-        Sphone = sphone;
+        this.sphone = sphone;
     }
 }
