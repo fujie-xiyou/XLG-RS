@@ -1,43 +1,43 @@
 package org.xiyoulinux.recruitment.model;
 
 public class Sign {
-    private Integer signID;
+    private Integer id;
 
-    private Integer joinID;
+    private Integer join_id;
 
-    private Integer processID;
+    private Integer process_id;
 
-    private String status;
+    private String sign_status;
 
-    public Integer getSignID() {
-        return signID;
+    public Integer getId() {
+        return id;
     }
 
-    public void setSignID(Integer signID) {
-        this.signID = signID;
+    public void setId(Integer id) {
+        this.id = id;
     }
 
-    public Integer getJoinID() {
-        return joinID;
+    public Integer getJoin_id() {
+        return join_id;
     }
 
-    public void setJoinID(Integer joinID) {
-        this.joinID = joinID;
+    public void setJoin_id(Integer join_id) {
+        this.join_id = join_id;
     }
 
-    public Integer getProcessID() {
-        return processID;
+    public Integer getProcess_id() {
+        return process_id;
     }
 
-    public void setProcessID(Integer processID) {
-        this.processID = processID;
+    public void setProcess_id(Integer process_id) {
+        this.process_id = process_id;
     }
 
-    public String getStatus() {
-        return status;
+    public String getSign_status() {
+        return sign_status;
     }
 
-    public void setStatus(String status) {
-        this.status = status;
+    public void setSign_status(String sign_status) {
+        this.sign_status = sign_status;
     }
 }

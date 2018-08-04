@@ -1,43 +1,41 @@
 package org.xiyoulinux.recruitment.model;
 
 public class Activity {
-    private Integer aid;
+    private Integer id;
 
-    private String aname;
+    private String act_name;
 
-    private String atime;
+    private String act_time;
 
-    private Integer processID;
+    private Integer process_id;
 
-    public Integer getAid() {
-        return aid;
+    public Integer getId() {
+        return id;
     }
 
-    public void setAid(Integer aid) {
-        this.aid = aid;
+    public void setId(Integer id) {
+        this.id = id;
     }
 
-    public String getAname() {
-        return aname;
+    public String getAct_name() { return act_name; }
+
+    public void setAct_name(String act_name) {
+        this.act_name = act_name;
     }
 
-    public void setAname(String aname) {
-        this.aname = aname;
+    public String getAct_time() {
+        return act_time;
     }
 
-    public String getAtime() {
-        return atime;
+    public void setAct_time(String act_time) {
+        this.act_time = act_time;
     }
 
-    public void setAtime(String atime) {
-        this.atime = atime;
+    public Integer getProcess_id() {
+        return process_id;
     }
 
-    public Integer getProcessID() {
-        return processID;
-    }
-
-    public void setProcessID(Integer processID) {
-        this.processID = processID;
+    public void setProcess_id(Integer process_id) {
+        this.process_id = process_id;
     }
 }

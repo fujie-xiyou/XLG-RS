@@ -1,43 +1,43 @@
 package org.xiyoulinux.recruitment.model;
 
 public class Process {
-    private Integer processID;
+    private Integer id;
 
-    private Integer activityID;
+    private Integer activity_id;
 
-    private Integer porder;
+    private Integer order;
 
-    private Integer pname;
+    private Integer process_name;
 
-    public Integer getProcessID() {
-        return processID;
+    public Integer getId() {
+        return id;
     }
 
-    public void setProcessID(Integer processID) {
-        this.processID = processID;
+    public void setId(Integer id) {
+        this.id = id;
     }
 
-    public Integer getActivityID() {
-        return activityID;
+    public Integer getActivity_id() {
+        return activity_id;
     }
 
-    public void setActivityID(Integer activityID) {
-        this.activityID = activityID;
+    public void setActivity_id(Integer activity_id) {
+        this.activity_id = activity_id;
     }
 
-    public Integer getPorder() {
-        return porder;
+    public Integer getOrder() {
+        return order;
     }
 
-    public void setPorder(Integer porder) {
-        this.porder = porder;
+    public void setOrder(Integer order) {
+        this.order = order;
     }
 
-    public Integer getPname() {
-        return pname;
+    public Integer getProcess_name() {
+        return process_name;
     }
 
-    public void setPname(Integer pname) {
-        this.pname = pname;
+    public void setProcess_name(Integer process_name) {
+        this.process_name = process_name;
     }
 }

@@ -1,18 +1,18 @@
 package org.xiyoulinux.recruitment.model;
 
 public class Score {
-    private Integer rankID;
+    private Integer id;
 
     private String rank;
 
     private Integer grade;
 
-    public Integer getRankID() {
-        return rankID;
+    public Integer getId() {
+        return id;
     }
 
-    public void setRankID(Integer rankID) {
-        this.rankID = rankID;
+    public void setId(Integer id) {
+        this.id = id;
     }
 
     public String getRank() {
