@@ -11,6 +11,10 @@
 .mtj.tmp/
 *.idea/
 *.iml
+out/
+target/
+db-config.properties
+generatorConfig.xml
 
 # Package Files #
 *.jar
