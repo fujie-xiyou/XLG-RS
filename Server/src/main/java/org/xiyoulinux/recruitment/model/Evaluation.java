@@ -1,13 +1,13 @@
 package org.xiyoulinux.recruitment.model;
 
 public class Evaluation {
-    private Integer evaluationID;
+    private Integer id;
 
-    private Integer userID;
+    private Integer user_id;
 
-    private Integer joinID;
+    private Integer join_id;
 
-    private Integer processID;
+    private Integer process_id;
 
     private Byte times;
 
@@ -19,38 +19,38 @@ public class Evaluation {
 
     private String overall_evaluation;
 
-    private Integer rankID;
+    private Integer rank_id;
 
-    public Integer getEvaluationID() {
-        return evaluationID;
+    public Integer getId() {
+        return id;
     }
 
-    public void setEvaluationID(Integer evaluationID) {
-        this.evaluationID = evaluationID;
+    public void setId(Integer id) {
+        this.id = id;
     }
 
-    public Integer getUserID() {
-        return userID;
+    public Integer getUser_id() {
+        return user_id;
     }
 
-    public void setUserID(Integer userID) {
-        this.userID = userID;
+    public void setUser_id(Integer user_id) {
+        this.user_id = user_id;
     }
 
-    public Integer getJoinID() {
-        return joinID;
+    public Integer getJoin_id() {
+        return join_id;
     }
 
-    public void setJoinID(Integer joinID) {
-        this.joinID = joinID;
+    public void setJoin_id(Integer join_id) {
+        this.join_id = join_id;
     }
 
-    public Integer getProcessID() {
-        return processID;
+    public Integer getProcess_id() {
+        return process_id;
     }
 
-    public void setProcessID(Integer processID) {
-        this.processID = processID;
+    public void setProcess_id(Integer process_id) {
+        this.process_id = process_id;
     }
 
     public Byte getTimes() {
@@ -93,11 +93,11 @@ public class Evaluation {
         this.overall_evaluation = overall_evaluation;
     }
 
-    public Integer getRankID() {
-        return rankID;
+    public Integer getRank_id() {
+        return rank_id;
     }
 
-    public void setRankID(Integer rankID) {
-        this.rankID = rankID;
+    public void setRank_id(Integer rank_id) {
+        this.rank_id = rank_id;
     }
 }

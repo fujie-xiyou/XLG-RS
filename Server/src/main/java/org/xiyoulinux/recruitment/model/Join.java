@@ -3,54 +3,54 @@ package org.xiyoulinux.recruitment.model;
 import java.util.Date;
 
 public class Join {
-    private Integer joinID;
+    private Integer id;
 
-    private String sno;
+    private String student_no;
 
-    private Integer processID;
+    private Integer process_id;
 
     private Boolean is_vaild;
 
-    private String sname;
+    private String cn_name;
 
-    private String spasswd;
+    private String passwd;
 
-    private String ssex;
+    private String sex;
 
-    private Date sbirthday;
+    private Date birthday;
 
-    private String sprovince;
+    private String province;
 
-    private String scoll;
+    private String college;
 
-    private String sdept;
+    private String dept;
 
-    private String sclass;
+    private String admin_class;
 
-    private String sphone;
+    private String mobile;
 
-    public Integer getJoinID() {
-        return joinID;
+    public Integer getId() {
+        return id;
     }
 
-    public void setJoinID(Integer joinID) {
-        this.joinID = joinID;
+    public void setId(Integer id) {
+        this.id = id;
     }
 
-    public String getSno() {
-        return sno;
+    public String getStudent_no() {
+        return student_no;
     }
 
-    public void setSno(String sno) {
-        this.sno = sno;
+    public void setStudent_no(String student_no) {
+        this.student_no = student_no;
     }
 
-    public Integer getProcessID() {
-        return processID;
+    public Integer getProcess_id() {
+        return process_id;
     }
 
-    public void setProcessID(Integer processID) {
-        this.processID = processID;
+    public void setProcess_id(Integer process_id) {
+        this.process_id = process_id;
     }
 
     public Boolean getIs_vaild() {
@@ -61,75 +61,75 @@ public class Join {
         this.is_vaild = is_vaild;
     }
 
-    public String getSname() {
-        return sname;
+    public String getCn_name() {
+        return cn_name;
     }
 
-    public void setSname(String sname) {
-        this.sname = sname;
+    public void setCn_name(String cn_name) {
+        this.cn_name = cn_name;
     }
 
-    public String getSpasswd() {
-        return spasswd;
+    public String getPasswd() {
+        return passwd;
     }
 
-    public void setSpasswd(String spasswd) {
-        this.spasswd = spasswd;
+    public void setPasswd(String passwd) {
+        this.passwd = passwd;
     }
 
-    public String getSsex() {
-        return ssex;
+    public String getSex() {
+        return sex;
     }
 
-    public void setSsex(String ssex) {
-        this.ssex = ssex;
+    public void setSex(String sex) {
+        this.sex = sex;
     }
 
-    public Date getSbirthday() {
-        return sbirthday;
+    public Date getBirthday() {
+        return birthday;
     }
 
-    public void setSbirthday(Date sbirthday) {
-        this.sbirthday = sbirthday;
+    public void setBirthday(Date birthday) {
+        this.birthday = birthday;
     }
 
-    public String getSprovince() {
-        return sprovince;
+    public String getProvince() {
+        return province;
     }
 
-    public void setSprovince(String sprovince) {
-        this.sprovince = sprovince;
+    public void setProvince(String province) {
+        this.province = province;
     }
 
-    public String getScoll() {
-        return scoll;
+    public String getCollege() {
+        return college;
     }
 
-    public void setScoll(String scoll) {
-        this.scoll = scoll;
+    public void setCollege(String college) {
+        this.college = college;
     }
 
-    public String getSdept() {
-        return sdept;
+    public String getDept() {
+        return dept;
     }
 
-    public void setSdept(String sdept) {
-        this.sdept = sdept;
+    public void setDept(String dept) {
+        this.dept = dept;
     }
 
-    public String getSclass() {
-        return sclass;
+    public String getAdmin_class() {
+        return admin_class;
     }
 
-    public void setSclass(String sclass) {
-        this.sclass = sclass;
+    public void setAdmin_class(String admin_class) {
+        this.admin_class = admin_class;
     }
 
-    public String getSphone() {
-        return sphone;
+    public String getMobile() {
+        return mobile;
     }
 
-    public void setSphone(String sphone) {
-        this.sphone = sphone;
+    public void setMobile(String mobile) {
+        this.mobile = mobile;
     }
 }
