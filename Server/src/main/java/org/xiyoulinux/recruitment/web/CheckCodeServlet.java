@@ -1,3 +1,7 @@
+package org.xiyoulinux.recruitment.web;
+
+import org.xiyoulinux.recruitment.untils.GetInfoFromJW;
+
 import javax.servlet.ServletException;
 import javax.servlet.ServletOutputStream;
 import javax.servlet.annotation.WebServlet;

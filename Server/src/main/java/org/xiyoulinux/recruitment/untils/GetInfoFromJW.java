@@ -1,3 +1,7 @@
+package org.xiyoulinux.recruitment.untils;
+
+import org.xiyoulinux.recruitment.model.Join;
+
 import java.io.File;
 import java.io.FileOutputStream;
 import java.io.InputStream;
@@ -17,7 +21,7 @@ public class GetInfoFromJW {
     private final String codeImgPath = path + "/CheckCode.aspx";
     private final String infoPath = path + "/xsgrxx.aspx?xh=";
     private CookieManager manager = new CookieManager();
-    private User user;
+    private Join join;
     public byte[] getCheckCode(){
         CookieHandler.setDefault(manager);
         try{
@@ -109,8 +113,8 @@ public class GetInfoFromJW {
         }
         return null;
     }
-    public User getUser(String xh){
-        if(this.user != null && this.user.getXh() == xh) return this.user;
+    public Join getJoin(String xh){
+        if(this.join != null && this.join.getSno() == xh) return this.join;
         CookieHandler.setDefault(manager);
         try{
             HttpURLConnection conn = (HttpURLConnection) new URL(infoPath + xh).openConnection();
@@ -129,7 +133,7 @@ public class GetInfoFromJW {
                 String data = new String(buff,"GBK");
                 //TODO 测试
                 //System.out.println("个人信息界面大小： "+off);
-                User user = new User();
+                Join join = new Join();
                 Pattern p = Pattern.compile(
                         "<span id=\"xm\">(.*)</span>[\\s\\S]*" +
                                 "<span id=\"lbl_xb\">(.*)</span>[\\s\\S]*" +
@@ -142,17 +146,17 @@ public class GetInfoFromJW {
                                 "<span id=\"lbl_dqszj\">(.*)</span>[\\s\\S]*");
                 Matcher m = p.matcher(data);
                 if(m.find()) {
-                    user.setXh(xh);
-                    user.setXm(m.group(1));
-                    user.setXb(m.group(2));
-                    user.setCsrq(m.group(3));
-                    user.setLys(m.group(4));
-                    user.setSfzh(m.group(5));
-                    user.setXy(m.group(6));
-                    user.setZymc(m.group(7));
-                    user.setXzb(m.group(8));
-                    user.setDqszj(m.group(9));
-                    return user;
+                    join.setSno(xh);
+//                    join.setXm(m.group(1));
+//                    join.setXb(m.group(2));
+//                    join.setCsrq(m.group(3));
+//                    join.setLys(m.group(4));
+//                    join.setSfzh(m.group(5));
+//                    join.setXy(m.group(6));
+//                    join.setZymc(m.group(7));
+//                    join.setXzb(m.group(8));
+//                    join.setDqszj(m.group(9));
+                    return join;
                 }else {
                     System.out.println("结果匹配失败！");
                 }
