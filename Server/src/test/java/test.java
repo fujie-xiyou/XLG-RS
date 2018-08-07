@@ -12,8 +12,6 @@ import org.xiyoulinux.recruitment.config.database.MyBatis;
 import org.xiyoulinux.recruitment.config.spring.RootConfig;
 import org.xiyoulinux.recruitment.config.spring.WebConfig;
 import org.xiyoulinux.recruitment.config.spring.WebInit;
-import org.xiyoulinux.recruitment.dao.ActivityDAO;
-import org.xiyoulinux.recruitment.model.Activity;
 
 @RunWith(SpringJUnit4ClassRunner.class)
 @ActiveProfiles("test")
@@ -27,12 +25,9 @@ public class test{
     @After
     public void after() throws Exception{}
 
-    @Autowired
-    private ActivityDAO activityDAO;
-
     @Test
     public void Test(){
-        Activity activity = new Activity("纳新1","2018-01-01",1);
-        System.out.println(activityDAO.insert(activity));
+//        Activity activity = new Activity("纳新1","2018-01-01",1);
+//        System.out.println(activityDAO.insert(activity));
     }
 }

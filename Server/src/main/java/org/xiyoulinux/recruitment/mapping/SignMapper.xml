@@ -1,0 +1,82 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="org.xiyoulinux.recruitment.dao.SignDAO">
+  <resultMap id="BaseResultMap" type="org.xiyoulinux.recruitment.model.po.Sign">
+    <id column="id" jdbcType="INTEGER" property="id" />
+    <result column="join_id" jdbcType="INTEGER" property="join_id" />
+    <result column="process_id" jdbcType="INTEGER" property="process_id" />
+    <result column="sign_status" jdbcType="CHAR" property="sign_status" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    id, join_id, process_id, sign_status
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from sign
+    where id = #{id,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from sign
+    where id = #{id,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="org.xiyoulinux.recruitment.model.po.Sign">
+    insert into sign (id, join_id, process_id, 
+      sign_status)
+    values (#{id,jdbcType=INTEGER}, #{join_id,jdbcType=INTEGER}, #{process_id,jdbcType=INTEGER}, 
+      #{sign_status,jdbcType=CHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="org.xiyoulinux.recruitment.model.po.Sign">
+    insert into sign
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        id,
+      </if>
+      <if test="join_id != null">
+        join_id,
+      </if>
+      <if test="process_id != null">
+        process_id,
+      </if>
+      <if test="sign_status != null">
+        sign_status,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        #{id,jdbcType=INTEGER},
+      </if>
+      <if test="join_id != null">
+        #{join_id,jdbcType=INTEGER},
+      </if>
+      <if test="process_id != null">
+        #{process_id,jdbcType=INTEGER},
+      </if>
+      <if test="sign_status != null">
+        #{sign_status,jdbcType=CHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="org.xiyoulinux.recruitment.model.po.Sign">
+    update sign
+    <set>
+      <if test="join_id != null">
+        join_id = #{join_id,jdbcType=INTEGER},
+      </if>
+      <if test="process_id != null">
+        process_id = #{process_id,jdbcType=INTEGER},
+      </if>
+      <if test="sign_status != null">
+        sign_status = #{sign_status,jdbcType=CHAR},
+      </if>
+    </set>
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="org.xiyoulinux.recruitment.model.po.Sign">
+    update sign
+    set join_id = #{join_id,jdbcType=INTEGER},
+      process_id = #{process_id,jdbcType=INTEGER},
+      sign_status = #{sign_status,jdbcType=CHAR}
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+</mapper>

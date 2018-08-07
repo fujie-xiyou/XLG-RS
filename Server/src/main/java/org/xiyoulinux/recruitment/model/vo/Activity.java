@@ -1,4 +1,4 @@
-package org.xiyoulinux.recruitment.model;
+package org.xiyoulinux.recruitment.model.vo;
 
 public class Activity {
     private Integer id;
@@ -17,7 +17,9 @@ public class Activity {
         this.id = id;
     }
 
-    public String getAct_name() { return act_name; }
+    public String getAct_name() {
+        return act_name;
+    }
 
     public void setAct_name(String act_name) {
         this.act_name = act_name;
