@@ -1,6 +1,6 @@
 package org.xiyoulinux.recruitment.model;
 
-import java.util.Date;
+import java.time.LocalDate;
 
 public class Join {
     private Integer id;
@@ -17,7 +17,7 @@ public class Join {
 
     private String sex;
 
-    private Date birthday;
+    private LocalDate birthday;
 
     private String province;
 
@@ -85,11 +85,11 @@ public class Join {
         this.sex = sex;
     }
 
-    public Date getBirthday() {
+    public LocalDate getBirthday() {
         return birthday;
     }
 
-    public void setBirthday(Date birthday) {
+    public void setBirthday(LocalDate birthday) {
         this.birthday = birthday;
     }
 

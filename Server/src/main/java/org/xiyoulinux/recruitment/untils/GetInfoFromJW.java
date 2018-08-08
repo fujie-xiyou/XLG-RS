@@ -10,6 +10,8 @@ import java.net.CookieHandler;
 import java.net.CookieManager;
 import java.net.HttpURLConnection;
 import java.net.URL;
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 import java.util.Arrays;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
@@ -114,7 +116,7 @@ public class GetInfoFromJW {
         return null;
     }
     public Join getJoin(String xh){
-        if(this.join != null && this.join.getSno() == xh) return this.join;
+        if(this.join != null && this.join.getStudent_no() == xh) return this.join;
         CookieHandler.setDefault(manager);
         try{
             HttpURLConnection conn = (HttpURLConnection) new URL(infoPath + xh).openConnection();
@@ -146,16 +148,17 @@ public class GetInfoFromJW {
                                 "<span id=\"lbl_dqszj\">(.*)</span>[\\s\\S]*");
                 Matcher m = p.matcher(data);
                 if(m.find()) {
-                    join.setSno(xh);
-//                    join.setXm(m.group(1));
-//                    join.setXb(m.group(2));
-//                    join.setCsrq(m.group(3));
-//                    join.setLys(m.group(4));
+                    join.setStudent_no(xh);
+                    join.setCn_name(m.group(1));
+                    join.setSex(m.group(2) == "男" ? "boy":"girl");
+                    join.setBirthday(LocalDate.parse(m.group(3),DateTimeFormatter.BASIC_ISO_DATE));
+                    join.setProvince(m.group(4));
 //                    join.setSfzh(m.group(5));
-//                    join.setXy(m.group(6));
-//                    join.setZymc(m.group(7));
-//                    join.setXzb(m.group(8));
+                    join.setCollege(m.group(6));
+                    join.setDept(m.group(7));
+                    join.setAdmin_class(m.group(8));
 //                    join.setDqszj(m.group(9));
+
                     return join;
                 }else {
                     System.out.println("结果匹配失败！");

@@ -6,6 +6,7 @@ import org.xiyoulinux.recruitment.config.spring.RootConfig;
 import org.xiyoulinux.recruitment.dao.JoinDAO;
 import org.xiyoulinux.recruitment.model.Join;
 public class test {
+    @Autowired
     public JoinDAO joinDAO;
     public static void main(String[] args){
         AnnotationConfigApplicationContext context = new AnnotationConfigApplicationContext(RootConfig.class);
