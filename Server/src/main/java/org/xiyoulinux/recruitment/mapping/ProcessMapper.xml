@@ -1,0 +1,82 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="org.xiyoulinux.recruitment.dao.ProcessDAO">
+  <resultMap id="BaseResultMap" type="org.xiyoulinux.recruitment.model.po.Process">
+    <id column="id" jdbcType="INTEGER" property="id" />
+    <result column="activity_id" jdbcType="INTEGER" property="activity_id" />
+    <result column="order" jdbcType="INTEGER" property="order" />
+    <result column="process_name" jdbcType="INTEGER" property="process_name" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    id, activity_id, order, process_name
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from process
+    where id = #{id,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from process
+    where id = #{id,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="org.xiyoulinux.recruitment.model.po.Process">
+    insert into process (id, activity_id, order, 
+      process_name)
+    values (#{id,jdbcType=INTEGER}, #{activity_id,jdbcType=INTEGER}, #{order,jdbcType=INTEGER}, 
+      #{process_name,jdbcType=INTEGER})
+  </insert>
+  <insert id="insertSelective" parameterType="org.xiyoulinux.recruitment.model.po.Process">
+    insert into process
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        id,
+      </if>
+      <if test="activity_id != null">
+        activity_id,
+      </if>
+      <if test="order != null">
+        order,
+      </if>
+      <if test="process_name != null">
+        process_name,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        #{id,jdbcType=INTEGER},
+      </if>
+      <if test="activity_id != null">
+        #{activity_id,jdbcType=INTEGER},
+      </if>
+      <if test="order != null">
+        #{order,jdbcType=INTEGER},
+      </if>
+      <if test="process_name != null">
+        #{process_name,jdbcType=INTEGER},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="org.xiyoulinux.recruitment.model.po.Process">
+    update process
+    <set>
+      <if test="activity_id != null">
+        activity_id = #{activity_id,jdbcType=INTEGER},
+      </if>
+      <if test="order != null">
+        order = #{order,jdbcType=INTEGER},
+      </if>
+      <if test="process_name != null">
+        process_name = #{process_name,jdbcType=INTEGER},
+      </if>
+    </set>
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="org.xiyoulinux.recruitment.model.po.Process">
+    update process
+    set activity_id = #{activity_id,jdbcType=INTEGER},
+      order = #{order,jdbcType=INTEGER},
+      process_name = #{process_name,jdbcType=INTEGER}
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+</mapper>

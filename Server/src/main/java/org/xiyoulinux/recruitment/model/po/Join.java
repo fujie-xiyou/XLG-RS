@@ -1,4 +1,4 @@
-package org.xiyoulinux.recruitment.model;
+package org.xiyoulinux.recruitment.model.po;
 
 import java.time.LocalDate;
 

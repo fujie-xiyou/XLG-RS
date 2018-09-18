@@ -13,8 +13,6 @@ import org.xiyoulinux.recruitment.config.database.MyBatis;
 import org.xiyoulinux.recruitment.config.spring.RootConfig;
 import org.xiyoulinux.recruitment.config.spring.WebConfig;
 import org.xiyoulinux.recruitment.config.spring.WebInit;
-import org.xiyoulinux.recruitment.dao.ActivityDAO;
-import org.xiyoulinux.recruitment.model.Activity;
 
 @RunWith(SpringJUnit4ClassRunner.class)
 @ActiveProfiles("test")
@@ -27,9 +25,6 @@ public class test{
 
     @After
     public void after() throws Exception{}
-
-    @Autowired
-    private ActivityDAO activityDAO;
 
     @Test
     public void Test(){

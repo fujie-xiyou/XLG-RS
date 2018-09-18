@@ -1,4 +1,4 @@
-package org.xiyoulinux.recruitment.model;
+package org.xiyoulinux.recruitment.model.po;
 
 public class Sign {
     private Integer id;
