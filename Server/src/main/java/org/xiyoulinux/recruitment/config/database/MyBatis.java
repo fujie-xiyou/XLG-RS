@@ -5,9 +5,11 @@ import org.mybatis.spring.mapper.MapperScannerConfigurer;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.core.io.Resource;
+import org.springframework.core.io.support.PathMatchingResourcePatternResolver;
 import org.springframework.jdbc.datasource.DataSourceTransactionManager;
 
 import javax.sql.DataSource;
+import java.io.IOException;
 
 @Configuration
 public class MyBatis {
@@ -16,7 +18,12 @@ public class MyBatis {
     public SqlSessionFactoryBean sqlSessionFactory(DataSource dataSource){
         SqlSessionFactoryBean sfb = new SqlSessionFactoryBean();
         sfb.setDataSource(dataSource);
-        sfb.setMapperLocations(new Resource[]{});
+        PathMatchingResourcePatternResolver resolver = new PathMatchingResourcePatternResolver();
+        try {
+            sfb.setMapperLocations(resolver.getResources("org/xiyoulinux/recruitment/mapping/*.xml"));
+        }catch (IOException e){
+            e.printStackTrace();
+        }
         return sfb;
     }
 

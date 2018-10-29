@@ -14,7 +14,7 @@ public class ResponseStatus {
         this(1);
     }
 
-    //直接使用字符串或字符串数组的构造器响应状态将为500
+    //直接使用字符串或字符串数组的构造器响应状态将为0
     public ResponseStatus(String... reasons) {
         this(0, reasons);
     }

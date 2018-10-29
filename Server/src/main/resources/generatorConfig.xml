@@ -6,7 +6,7 @@
 <generatorConfiguration>
     <!--mysql 连接数据库jar 这里选择自己本地位置-->
 
-    <classPathEntry location="/home/limeng/Downloads/mysql-connector-java-5.1.46" />
+    <classPathEntry location=":/home/fujie/.m2/repository/mysql/mysql-connector-java/8.0.11" />
 
     <context id="Mybatis3Context" targetRuntime="MyBatis3">
 
@@ -18,7 +18,7 @@
         </commentGenerator>
 
         <jdbcConnection driverClass="com.mysql.jdbc.Driver"
-                        connectionURL="jdbc:mysql://localhost:3306/javaweb_recruitment?useUnicode=true&amp;characterEncoding=utf-8&amp;useSSL=false"
+                        connectionURL="jdbc:my4sql://localhost:3306/javaweb_recruitment?useUnicode=true&amp;characterEncoding=utf-8&amp;useSSL=false"
                         userId="root"
                         password="lm19980108">
         </jdbcConnection>

@@ -1,13 +1,13 @@
-package org.xiyoulinux.recruitment.untils.getStuInfo;
+package org.xiyoulinux.recruitment.untils;
 
 import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.JSONObject;
-import getStuInfo.B64;
-import getStuInfo.RSAEncoder;
-import getStuInfo.ResponseResult;
 import org.jsoup.Connection;
 import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
+import org.xiyoulinux.recruitment.untils.getStuInfo.B64;
+import org.xiyoulinux.recruitment.untils.getStuInfo.RSAEncoder;
+import org.xiyoulinux.recruitment.untils.getStuInfo.ResponseResult;
 
 import java.util.Date;
 import java.util.HashMap;
@@ -24,14 +24,15 @@ public class ConnectJWGL {
     private Connection.Response response;
     private Document document;
     private String stuNum;
-    private String password;
+    private String originalPassword; // 原始密码
+    private String password; // 加密后的密码
 
     public ConnectJWGL(String stuNum,String password){
         this.stuNum = stuNum;
-        this.password = password;
+        this.originalPassword = password;
     }
 
-    public ResponseResult init() throws Exception{
+    public org.xiyoulinux.recruitment.untils.getStuInfo.ResponseResult init() throws Exception{
         getCsrftoken();
         getRSApublickey();
         return login();
@@ -61,12 +62,12 @@ public class ConnectJWGL {
         JSONObject jsonObject = JSON.parseObject(response.body());
         modulus = jsonObject.getString("modulus");
         exponent = jsonObject.getString("exponent");
-        password = RSAEncoder.RSAEncrypt(password, B64.b64tohex(modulus), B64.b64tohex(exponent));
+        password = RSAEncoder.RSAEncrypt(originalPassword, B64.b64tohex(modulus), B64.b64tohex(exponent));
         password = B64.hex2b64(password);
     }
 
     //登录
-    private ResponseResult login() throws Exception{
+    private org.xiyoulinux.recruitment.untils.getStuInfo.ResponseResult login() throws Exception{
         connection = Jsoup.connect(url+ "/jwglxt/xtgl/login_slogin.html");
         connection.header("Content-Type","application/x-www-form-urlencoded;charset=utf-8");
         connection.header("User-Agent", "Mozilla/5.0 (Windows NT 6.1; WOW64; rv:29.0) Gecko/20100101 Firefox/29.0");
@@ -82,7 +83,7 @@ public class ConnectJWGL {
         if(document.getElementById("tips") == null){
             String data = getStudentInfo();
             logout();
-            return new ResponseResult(true,data);
+            return new org.xiyoulinux.recruitment.untils.getStuInfo.ResponseResult(true,data);
         }else{
             String error = document.getElementById("tips").text();
             logout();

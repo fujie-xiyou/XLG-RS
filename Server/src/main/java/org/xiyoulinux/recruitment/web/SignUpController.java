@@ -7,7 +7,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.xiyoulinux.recruitment.dao.JoinDAO;
-import org.xiyoulinux.recruitment.model.Join;
+import org.xiyoulinux.recruitment.model.po.Join;
 import org.xiyoulinux.recruitment.untils.GetInfoFromJW;
 import org.xiyoulinux.recruitment.untils.Md5Until;
 import org.xiyoulinux.recruitment.untils.ResponseResult;

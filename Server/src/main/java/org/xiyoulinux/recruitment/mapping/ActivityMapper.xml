@@ -11,7 +11,7 @@
     id, act_name, act_time, process_id
   </sql>
   <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
-    select 
+    select
     <include refid="Base_Column_List" />
     from activity
     where id = #{id,jdbcType=INTEGER}
@@ -21,12 +21,12 @@
     where id = #{id,jdbcType=INTEGER}
   </delete>
   <insert id="insert" parameterType="org.xiyoulinux.recruitment.model.vo.Activity">
-    insert into activity (id, act_name, act_time, 
+    insert into activity (id, act_name, act_time,
       process_id)
-    values (#{id,jdbcType=INTEGER}, #{act_name,jdbcType=VARCHAR}, #{act_time,jdbcType=VARCHAR}, 
+    values (#{id,jdbcType=INTEGER}, #{act_name,jdbcType=VARCHAR}, #{act_time,jdbcType=VARCHAR},
       #{process_id,jdbcType=INTEGER})
   </insert>
-  <insert id="insertSelective" parameterType="org.xiyoulinux.recruitment.model.vo.Activity">
+  <insert id="insertSelective" keyProperty="id" parameterType="org.xiyoulinux.recruitment.model.vo.Activity">
     insert into activity
     <trim prefix="(" suffix=")" suffixOverrides=",">
       <if test="id != null">

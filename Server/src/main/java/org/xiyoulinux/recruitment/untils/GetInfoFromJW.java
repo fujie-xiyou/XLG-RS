@@ -1,6 +1,6 @@
 package org.xiyoulinux.recruitment.untils;
 
-import org.xiyoulinux.recruitment.model.Join;
+import org.xiyoulinux.recruitment.model.po.Join;
 
 import java.io.File;
 import java.io.FileOutputStream;
@@ -150,7 +150,7 @@ public class GetInfoFromJW {
                 if(m.find()) {
                     join.setStudent_no(xh);
                     join.setCn_name(m.group(1));
-                    join.setSex(m.group(2) == "男" ? "boy":"girl");
+                    join.setSex(m.group(2).equals("男") ? "boy":"girl");
                     join.setBirthday(LocalDate.parse(m.group(3),DateTimeFormatter.BASIC_ISO_DATE));
                     join.setProvince(m.group(4));
 //                    join.setSfzh(m.group(5));

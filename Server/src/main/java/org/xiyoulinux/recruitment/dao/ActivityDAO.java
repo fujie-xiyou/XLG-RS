@@ -1,6 +1,6 @@
 package org.xiyoulinux.recruitment.dao;
 
-import org.xiyoulinux.recruitment.model.vo.Activity;
+import org.xiyoulinux.recruitment.model.po.Activity;
 
 public interface ActivityDAO {
     int deleteByPrimaryKey(Integer id);

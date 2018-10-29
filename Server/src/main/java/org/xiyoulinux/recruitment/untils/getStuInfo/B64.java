@@ -1,4 +1,4 @@
-package getStuInfo;
+package org.xiyoulinux.recruitment.untils.getStuInfo;
 
 import static java.lang.Integer.parseInt;
 

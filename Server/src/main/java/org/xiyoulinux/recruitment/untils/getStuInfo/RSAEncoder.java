@@ -1,4 +1,4 @@
-package getStuInfo;
+package org.xiyoulinux.recruitment.untils.getStuInfo;
 
 import java.math.BigInteger;
 import java.util.Random;
@@ -19,10 +19,12 @@ public class RSAEncoder {
     }
 
     private static BigInteger RSADoPublic(BigInteger x){
+        System.out.println("x=" + x);
               return x.modPow(e, n);
     }
 
     private static BigInteger pkcs1pad2(String s, int n){
+        System.out.println("pwd = "+s);
         if(n < s.length() + 11) { // TODO: fix for utf-8
             System.err.println("Message too long for getStuInfo.RSAEncoder");
             return null;

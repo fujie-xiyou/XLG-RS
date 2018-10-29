@@ -7,7 +7,7 @@ public class SignService {
     @Autowired
     private JoinDAO joinDAO;
     public int getIDfromNo(){
-
+       // joinDAO.
         return  0;
     }
 }

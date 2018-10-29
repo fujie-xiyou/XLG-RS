@@ -11,7 +11,13 @@ public interface JoinDAO {
 
     Join selectByPrimaryKey(Integer id);
 
+    Join selectRand();
+
+    Integer selectByNo(String no);
+
     int updateByPrimaryKeySelective(Join record);
 
     int updateByPrimaryKey(Join record);
+
+    int updateIs_vaild(Boolean is_vaild);
 }

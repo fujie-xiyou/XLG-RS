@@ -1,4 +1,4 @@
-package getStuInfo;
+package org.xiyoulinux.recruitment.untils.getStuInfo;
 
 public class ResponseResult {
     private boolean flag;
