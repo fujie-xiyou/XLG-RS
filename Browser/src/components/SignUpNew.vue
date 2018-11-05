@@ -136,7 +136,7 @@
         //获取公钥 对密码进行加密
         var modulus, exponent;
         this.view.isDisableButton = true;
-        this.view.is_check = -1; // 防止在响应过程中用户通过修改输入框的时间将按钮又设置为可用
+        this.view.is_check = -1; // 防止在响应过程中用户通过修改输入框的事件将按钮又设置为可用
         $('#submit').text('请稍候...');
 
         var fd = 'student_no=' + this.form.student_no
