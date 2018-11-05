@@ -25,20 +25,19 @@
     </div>
     <form class="form-sign">
       <h4>
-        <img class="logo" src="../assets/xiyoulinux.png" alt="" width="30%">
-        &nbsp;&nbsp;+&nbsp;&nbsp;
-        <img class="logo" src="../assets/sfd.png" alt="" width="30%">
+        <img class="logo" src="../assets/xiyoulinux.png" alt="" width="40%">
       </h4>
       <h1 class="h4 mb-4 font-weight-normal">西邮Linux兴趣小组<br/>{{view.title}}</h1>
-      <input type="number" id="student_no" v-model="form.student_no" @blur="checkNo" class="form-control"
+      <input type="number" id="student_no" v-model="form.student_no" @input="checkNo" class="form-control"
              placeholder="请输入学号" required>
-      <input type="text" id="real_name" v-model="form.real_name" @input="checkName" class="form-control"
-             placeholder="请输入姓名"
-             required>
-      <input type="text" id="admin_class" v-model="form.admin_class" @input="checkClass" class="form-control"
-             placeholder="请输入班级"
-             required>
-
+      <input type="password" id="password" v-model="form.password" class="form-control" @input="checkPassword"
+             placeholder="请输入教务系统密码" required/>
+      <input type="number" id="mobile" v-model="form.mobile" class="form-control" @blur="checkMobile"
+             placeholder="请输入手机号" required>
+      <div class="form-check" id="authorization" >
+        <input type="checkbox" class="form-check-input" id="check_box" @input="checkAuthorization"/>
+        <label class="form-check-label" for="check_box">授权我们获取您的姓名和班级信息</label>
+      </div>
       <button id="submit" class="btn btn-lg btn-primary btn-block" type="submit" @click="submit"
               v-bind:disabled="view.isDisableButton">提交
       </button>
@@ -58,20 +57,18 @@
           isDisableButton: true, //是否禁用button
           is_check: 0,
           flagMap: {
-            max: 7,
+            max: 2 ** 4 - 1, //4代表下方共有几个有效参数 如需求变更可以修改之
             student_no: 0b1,
-            real_name: 0b10,
-            admin_class: 0b100,
-            checkCode: 0b1000
+            password: 0b10,
+            mobile: 0b100,
+            authorization: 0b1000,
           },
         },
         form: {
           student_no: '',
-          real_name: '',
-          admin_class: '',
           password: '',
-          mobile: '',
-          checkCode: '',
+          mobile :'',
+          authorization: false
         },
 
       }
@@ -90,6 +87,10 @@
         document.getElementById(id).classList.remove('is-invalid');
       },
       checkNo() {
+        if(this.form.student_no.length !== 8){
+          this.setInvalid('student_no');
+          return;
+        }
         let re = /^[01]\d(\d{2})\d{4}$/;
         let arr = re.exec(this.form.student_no);
         let maxGrade = Math.max(...this.activity.grades) - 2000;
@@ -116,19 +117,19 @@
           this.setInvalid('password')
         }
       },
-      checkName() {
-        if (this.form.real_name === '') {
-          this.setInvalid('real_name');
+      checkMobile() {
+        let re = /^(13[0-9]|14[579]|15[0-3,5-9]|16[6]|17[0135678]|18[0-9]|19[89])\d{8}$/;
+        if (re.test(this.form.mobile)) {
+          this.setNormal('mobile');
         } else {
-          this.setNormal('real_name');
+          toastr.warning('手机号都记错@_@');
+          this.setInvalid('mobile');
         }
       },
-      checkClass() {
-        if (this.form.admin_class === '') {
-          this.setInvalid('admin_class');
-        } else {
-          this.setNormal('admin_class');
-        }
+      checkAuthorization(){
+        this.form.authorization = !this.form.authorization;
+        if(this.form.authorization) this.setNormal('authorization');
+        else this.setInvalid('authorization');
       },
       submit() {
 
@@ -142,7 +143,7 @@
         var fd = 'student_no=' + this.form.student_no
           + '&real_name=' + encodeURIComponent(this.form.real_name)
           + '&admin_class=' + encodeURIComponent(this.form.admin_class);
-        console.log(fd)
+        console.log(fd);
         let config = {
           headers: {
             'Content-Type': 'application/x-www-form-urlencoded'
@@ -200,17 +201,16 @@
   }
 
   #password {
-    margin-bottom: 1.5rem;
-    border-radius: 0;
-  }
-  #real_name {
     margin-bottom: -1px;
     border-radius: 0;
   }
-  #admin_class {
-    margin-bottom: 1.5rem;
+  #mobile{
     border-top-left-radius: 0;
     border-top-right-radius: 0;
+    margin-bottom: 1rem;
+  }
+  #authorization{
+    margin-bottom: 1.5rem;
   }
 
   #readme-button {
