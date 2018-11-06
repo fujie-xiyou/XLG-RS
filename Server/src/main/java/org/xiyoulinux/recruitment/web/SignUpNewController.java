@@ -4,6 +4,7 @@ import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
@@ -29,16 +30,15 @@ public class SignUpNewController {
     private JoinDAO joinDAO;
 
     @RequestMapping(value = "/signUpNew", method = RequestMethod.POST)
-    public ResponseResult signUp(HttpServletRequest request) {
+    public ResponseResult signUp(HttpServletRequest request ,@RequestBody Join join) {
         try {
             request.setCharacterEncoding("UTF-8");
         } catch (UnsupportedEncodingException e) {
             e.printStackTrace();
         }
-        Join join = new Join();
-        String sno = request.getParameter("student_no");
-        String passwd = request.getParameter("password");
-        String mobile = request.getParameter("mobile");
+
+        String sno = join.getStudent_no();
+        String passwd = join.getPasswd();
 
         ConnectJWGL jw = (ConnectJWGL) request.getSession().getAttribute("JWGL");
 
@@ -71,7 +71,6 @@ public class SignUpNewController {
             join.setCn_name(jsonObject.getString("xm"));
             join.setBirthday(LocalDate.parse(jsonObject.getString("csrq"),
                     DateTimeFormatter.ofPattern("yyyy-MM-dd")));
-            join.setMobile(mobile);
             join.setPasswd(Md5Until.getMd5(passwd));
             join.setProcess_id(0);
             join.setIs_vaild(true);
