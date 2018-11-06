@@ -30,7 +30,7 @@
       <h1 class="h4 mb-4 font-weight-normal">西邮Linux兴趣小组<br/>{{view.title}}</h1>
       <input type="number" id="student_no" v-model="form.student_no" @input="checkNo" class="form-control"
              placeholder="请输入学号" required>
-      <input type="password" id="password" v-model="form.password" class="form-control" @input="checkPassword"
+      <input type="password" id="passwd" v-model="form.passwd" class="form-control" @input="checkPassword"
              placeholder="请输入教务系统密码" required/>
       <input type="number" id="mobile" v-model="form.mobile" class="form-control" @blur="checkMobile"
              placeholder="请输入手机号" required>
@@ -59,14 +59,14 @@
           flagMap: {
             max: 2 ** 4 - 1, //4代表下方共有几个有效参数 如需求变更可以修改之
             student_no: 0b1,
-            password: 0b10,
+            passwd: 0b10,
             mobile: 0b100,
             authorization: 0b1000,
           },
         },
         form: {
           student_no: '',
-          password: '',
+          passwd: '',
           mobile :'',
           authorization: false
         },
@@ -111,10 +111,10 @@
       },
       checkPassword() {
         let re = /.{6,26}/;
-        if (re.test(this.form.password)) {
-          this.setNormal('password');
+        if (re.test(this.form.passwd)) {
+          this.setNormal('passwd');
         } else {
-          this.setInvalid('password')
+          this.setInvalid('passwd')
         }
       },
       checkMobile() {
@@ -209,7 +209,7 @@
     border-bottom-left-radius: 0;
   }
 
-  #password {
+  #passwd {
     margin-bottom: -1px;
     border-radius: 0;
   }
