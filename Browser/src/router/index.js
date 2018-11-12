@@ -4,6 +4,7 @@ import SignUp from '@/components/SignUp'
 import SignUpNew from '@/components/SignUpNew'
 import SignIn from '@/components/SignIn'
 import Info from '@/components/Info'
+import SignUpNext from '@/components/SignUpNext'
 
 Vue.use(Router);
 
@@ -33,6 +34,11 @@ export default new Router({
       path: '/info',
       name: 'Info',
       component: Info
+    },
+    {
+      path: '/sign-up-next',
+      name: 'SignUpNext',
+      component: SignUpNext
     }
   ]
 })
