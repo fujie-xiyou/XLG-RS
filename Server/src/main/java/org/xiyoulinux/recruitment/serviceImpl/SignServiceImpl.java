@@ -19,13 +19,12 @@ public class SignServiceImpl implements SignService {
     private JoinDAO joinDAO;
 
     @Override
-    public ResponseResult signUp(HttpServletRequest request) {
+    public ResponseResult signUp(HttpServletRequest request,String mobile) {
         Join join = (Join) request.getSession().getAttribute("join");
         if (join == null) {
             return new ResponseResult<String>(0,"请先检验学号密码");
         }
-
-
+        join.setMobile(mobile);
         if (joinDAO.insertSelective(join) > 0) {
             return new ResponseResult();
         } else {
@@ -51,6 +50,7 @@ public class SignServiceImpl implements SignService {
             //当学号密码校验通过后才能得知是否已经报过名
             if (joinDAO.selectByNo(sno) != null) {
                 return new ResponseResult<String>(2,"你已经报过名啦！");
+                //返回2唯一代表已经报过名！！！
             }
             JSONObject jsonObject = JSON.parseObject(liMengResult.getData().toString());
             join.setAdmin_class(jsonObject.getString("bh_id"));

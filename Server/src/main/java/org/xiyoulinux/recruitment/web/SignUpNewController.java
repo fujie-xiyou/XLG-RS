@@ -19,14 +19,14 @@ public class SignUpNewController {
     private SignService signService;
 
     @RequestMapping(value = "/signUpNew", method = RequestMethod.POST)
-    public ResponseResult signUp(HttpServletRequest request ,@RequestBody Join join) {
+    public ResponseResult signUp(HttpServletRequest request ,@RequestBody String mobile) {
         try {
             request.setCharacterEncoding("UTF-8");
         } catch (UnsupportedEncodingException e) {
             e.printStackTrace();
         }
 
-        return signService.signUp(request);
+        return signService.signUp(request,mobile);
 
     }
     @RequestMapping(value = "/checkUser",method = RequestMethod.POST)
