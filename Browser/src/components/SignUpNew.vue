@@ -139,17 +139,7 @@
         this.view.isDisableButton = true;
         this.view.is_check = -1; // 防止在响应过程中用户通过修改输入框的事件将按钮又设置为可用
         $('#submit').text('请稍候...');
-/*
-        var fd = 'student_no=' + this.form.student_no
-          + '&real_name=' + encodeURIComponent(this.form.real_name)
-          + '&admin_class=' + encodeURIComponent(this.form.admin_class);
-        console.log(fd);
-        let config = {
-          headers: {
-            'Content-Type': 'application/x-www-form-urlencoded'
-          }
-        };
-        */
+
         let join = Object.assign(this.form);
         delete join.authorization;
         let config = {
