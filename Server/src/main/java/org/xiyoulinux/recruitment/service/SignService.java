@@ -7,5 +7,6 @@ import org.xiyoulinux.recruitment.untils.ResponseResult;
 import javax.servlet.http.HttpServletRequest;
 
 public interface SignService {
-    public ResponseResult signUp(HttpServletRequest request , Join join);
+    public ResponseResult signUp(HttpServletRequest request);
+    public ResponseResult checkUser(HttpServletRequest request , Join join);
 }

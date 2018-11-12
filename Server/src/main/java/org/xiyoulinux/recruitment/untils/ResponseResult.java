@@ -1,28 +1,28 @@
 package org.xiyoulinux.recruitment.untils;
 
-import java.util.List;
 
 
 public class ResponseResult<T> {
-    private ResponseStatus status;
+    private int status;
     private T result;
 
-    public ResponseResult(ResponseStatus status, T result) {
+    public ResponseResult(int status, T result) {
         this.status = status;
         this.result = result;
     }
-    public ResponseResult(ResponseStatus status){
-        this(status,null);
-    }
-    public ResponseResult(T result){
-        this(new ResponseStatus(),result);
+    public ResponseResult(){
+        this(null);
     }
 
-    public ResponseStatus getStatus() {
+    public ResponseResult(T result){
+        this(1,result);
+    }
+
+    public int getStatus() {
         return status;
     }
 
-    public void setStatus(ResponseStatus status) {
+    public void setStatus(int status) {
         this.status = status;
     }
 

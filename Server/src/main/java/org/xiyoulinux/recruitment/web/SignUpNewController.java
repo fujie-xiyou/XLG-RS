@@ -26,7 +26,11 @@ public class SignUpNewController {
             e.printStackTrace();
         }
 
-        return signService.signUp(request,join);
+        return signService.signUp(request);
 
+    }
+    @RequestMapping(value = "/checkUser",method = RequestMethod.POST)
+    public ResponseResult checkUser(HttpServletRequest request ,@RequestBody Join join ){
+        return signService.checkUser(request,join);
     }
 }
