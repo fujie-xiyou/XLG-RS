@@ -35,7 +35,7 @@
         <input type="checkbox" class="form-check-input" id="check_box" @input="checkAuthorization"/>
         <label class="form-check-label" for="check_box">授权我们记录您的姓名和班级信息</label>
       </div>
-      <button id="submit" class="btn btn-lg btn-primary btn-block" type="submit" @click="submit"
+      <button id="submit" class="btn btn-lg btn-primary btn-block" type="submit" @click.prevent="submit"
               v-bind:disabled="view.isDisableButton">{{form.button_text}}
       </button>
     </form>

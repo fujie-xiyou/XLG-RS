@@ -11,7 +11,7 @@
       <input type="password" id="passwd" v-model="form.passwd" class="form-control" @input="checkPassword"
              placeholder="请输入教务系统密码" required/>
 
-      <button id="submit" class="btn btn-lg btn-primary btn-block" type="submit" @click="submit"
+      <button id="submit" class="btn btn-lg btn-primary btn-block" type="submit" @click.prevent="submit"
               v-bind:disabled="view.isDisableButton">{{form.button_text}}
       </button>
     </form>
