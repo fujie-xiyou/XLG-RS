@@ -32,10 +32,10 @@
       <input type="number" id="mobile" v-model="form.mobile" class="form-control" @blur="checkMobile"
              placeholder="请输入手机号" required>
       <div class="form-check" id="authorization">
-        <input type="checkbox" class="form-check-input" id="check_box" @input="checkAuthorization"/>
+        <input type="checkbox" class="form-check-input" id="check_box" @click="checkAuthorization"/>
         <label class="form-check-label" for="check_box">授权我们记录您的姓名和班级信息</label>
       </div>
-      <button id="submit" class="btn btn-lg btn-primary btn-block" type="submit" @click.prevent="submit"
+      <button id="submit_sign" class="btn btn-lg btn-primary btn-block" type="submit" @click.prevent="submit"
               v-bind:disabled="view.isDisableButton">{{form.button_text}}
       </button>
     </form>
