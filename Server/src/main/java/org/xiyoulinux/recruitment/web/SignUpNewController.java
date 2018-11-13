@@ -1,10 +1,8 @@
 package org.xiyoulinux.recruitment.web;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.bind.annotation.*;
 import org.xiyoulinux.recruitment.model.po.Join;
 import org.xiyoulinux.recruitment.service.SignService;
 import org.xiyoulinux.recruitment.untils.*;
@@ -19,7 +17,7 @@ public class SignUpNewController {
     private SignService signService;
 
     @RequestMapping(value = "/signUpNew", method = RequestMethod.POST)
-    public ResponseResult signUp(HttpServletRequest request ,@RequestBody String mobile) {
+    public ResponseResult signUp(HttpServletRequest request ,@RequestParam(value = "mobile") String mobile) {
         try {
             request.setCharacterEncoding("UTF-8");
         } catch (UnsupportedEncodingException e) {

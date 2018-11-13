@@ -24,8 +24,12 @@ public class SignServiceImpl implements SignService {
         if (join == null) {
             return new ResponseResult<String>(0,"请先检验学号密码");
         }
+        if(request.getSession().getAttribute("notSign") == null){
+            return new ResponseResult<String>(0,"我猜你已经报过名了");
+        }
         join.setMobile(mobile);
         if (joinDAO.insertSelective(join) > 0) {
+            request.getSession().removeAttribute("notSign");
             return new ResponseResult();
         } else {
             return new ResponseResult<String>(0,"服务器异常..");
@@ -59,6 +63,7 @@ public class SignServiceImpl implements SignService {
             join.setProcess_id(0);
             join.setIs_vaild(true);
             request.getSession().setAttribute("join", join);
+            request.getSession().setAttribute("notSign","zqn");
             return new ResponseResult();
         } else {
             return new ResponseResult<String>(0,(String) liMengResult.getData());
