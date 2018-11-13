@@ -1,28 +1,6 @@
 <template>
   <div id="sign-up" class="form-sign">
-    <button type="button" id="readme-button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal">
-      README
-    </button>
-    <!-- Modal -->
-    <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
-         aria-hidden="true">
-      <div class="modal-dialog" role="document">
-        <div class="modal-content">
-          <div class="modal-header">
-            <h5 class="modal-title" id="exampleModalLabel">报名须知</h5>
-            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-              <span aria-hidden="true">&times;</span>
-            </button>
-          </div>
-          <div class="modal-body">
-            <p v-html="activity.readme"></p>
-          </div>
-          <div class="modal-footer">
-            <button type="button" class="btn btn-primary" data-dismiss="modal">我知道了</button>
-          </div>
-        </div>
-      </div>
-    </div>
+
     <form class="form-sign">
       <h4>
         <img class="logo" src="../assets/xiyoulinux.png" alt="" width="40%">
@@ -148,7 +126,7 @@
             this.view.is_check = this.view.flagMap.max;//将按钮设置为可用
             if (response.data.status === 1) {
               //学号密码校验通过 并且尚未注册 跳转至手机号校验页面
-              this.$router.push('/sign-up-next')
+              this.$router.push('/sign-up-next');
             } else {
               toastr.warning(response.data.result)
             }
@@ -197,16 +175,6 @@
 
   }
 
-
-  #readme-button {
-    position: absolute;
-    right: 10px;
-    top: 10px;
-  }
-
-  #exampleModal {
-    text-align: left;
-  }
 
 
 </style>

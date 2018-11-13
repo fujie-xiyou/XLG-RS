@@ -1,5 +1,28 @@
 <template>
   <div id="sign-up" class="form-sign">
+    <button type="button" id="readme-button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal">
+      README
+    </button>
+    <!-- Modal -->
+    <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+         aria-hidden="true">
+      <div class="modal-dialog" role="document">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title" id="exampleModalLabel">报名须知</h5>
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+              <span aria-hidden="true">&times;</span>
+            </button>
+          </div>
+          <div class="modal-body">
+            <p v-html="activity.readme"></p>
+          </div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-primary" data-dismiss="modal">我知道了</button>
+          </div>
+        </div>
+      </div>
+    </div>
     <form class="form-sign">
       <h4>
         <img class="logo" src="../assets/xiyoulinux.png" alt="" width="40%">
@@ -8,9 +31,9 @@
 
       <input type="number" id="mobile" v-model="form.mobile" class="form-control" @blur="checkMobile"
              placeholder="请输入手机号" required>
-      <div class="form-check" id="authorization" >
+      <div class="form-check" id="authorization">
         <input type="checkbox" class="form-check-input" id="check_box" @input="checkAuthorization"/>
-        <label class="form-check-label" for="check_box">授权我们获取您的姓名和班级信息</label>
+        <label class="form-check-label" for="check_box">授权我们记录您的姓名和班级信息</label>
       </div>
       <button id="submit" class="btn btn-lg btn-primary btn-block" type="submit" @click="submit"
               v-bind:disabled="view.isDisableButton">{{form.button_text}}
@@ -37,7 +60,7 @@
           },
         },
         form: {
-          mobile :'',
+          mobile: '',
           authorization: false,
           button_text: '报名'
         },
@@ -66,9 +89,9 @@
           this.setInvalid('mobile');
         }
       },
-      checkAuthorization(){
+      checkAuthorization() {
         this.form.authorization = !this.form.authorization;
-        if(this.form.authorization) this.setNormal('authorization');
+        if (this.form.authorization) this.setNormal('authorization');
         else this.setInvalid('authorization');
       },
       submit() {
@@ -77,27 +100,24 @@
         this.view.isDisableButton = true;
         this.view.is_check = -1; // 防止在响应过程中用户通过修改输入框的事件将按钮又设置为可用
         $('#submit').text('请稍候...');
-
-        let join = Object.assign(this.form);
-        delete join.authorization;
+        let fd = 'mobile=' + this.form.mobile;
         let config = {
           headers: {
-            'Content-Type' : 'application/json'
+            'Content-Type': 'application/x-www-form-urlencoded'
           }
 
         };
-        this.$axios.post(this.host + '/signUpNew', join, config)
+        this.$axios.post(this.host + '/signUpNew', fd, config)
           .then((response) => {
             //console.log(response);
             $('#submit').text(this.form.button_text);
             this.view.isDisableButton = false;
             this.view.is_check = this.view.flagMap.max;//将按钮设置为可用
-            if (response.data.status.statusCode === 1) {
+            if (response.data.status === 1) {
               toastr.success('报名成功 ^-^');
             } else {
-              response.data.status.reasons.forEach((reason) => {
-                toastr.warning(reason);
-              })
+              toastr.warning(response.data.result);
+
             }
           })
           .catch((error) => {
@@ -119,6 +139,7 @@
     },
     props: ['host', 'activity'],
     mounted() {
+      $('#exampleModal').modal({show: true});
       toastr.options.positionClass = 'toast-top-center';
       document.title = '西邮Linux兴趣小组' + this.view.title;
     },
@@ -130,14 +151,25 @@
     margin-bottom: 1.5rem;
   }
 
-  #mobile{
-    border-top-left-radius: 0;
-    border-top-right-radius: 0;
+  #mobile {
     margin-bottom: 1rem;
   }
-  #authorization{
+
+  #authorization {
     margin-bottom: 1.5rem;
   }
+
+
+  #readme-button {
+    position: absolute;
+    right: 10px;
+    top: 10px;
+  }
+
+  #exampleModal {
+    text-align: left;
+  }
+
 
 
 </style>
