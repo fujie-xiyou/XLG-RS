@@ -29,7 +29,7 @@
       </h4>
       <h1 class="h4 mb-4 font-weight-normal">西邮Linux兴趣小组<br/>{{view.title}}</h1>
 
-      <input type="number" id="mobile" v-model="form.mobile" class="form-control" @blur="checkMobile"
+      <input type="number" id="mobile" v-model="form.mobile" class="form-control" @input="checkMobile"
              placeholder="请输入手机号" required>
       <div class="form-check" id="authorization">
         <input type="checkbox" class="form-check-input" id="check_box" @click="checkAuthorization"/>
@@ -85,7 +85,7 @@
         if (re.test(this.form.mobile)) {
           this.setNormal('mobile');
         } else {
-          toastr.warning('手机号都记错@_@');
+          if(this.form.mobile.length === 11) toastr.warning('手机号都记错@_@');
           this.setInvalid('mobile');
         }
       },
