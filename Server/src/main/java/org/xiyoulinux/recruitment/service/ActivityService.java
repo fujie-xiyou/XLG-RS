@@ -8,5 +8,6 @@ public interface ActivityService {
     public int add(Activity activity);
     public boolean delete(Activity activity);
     public boolean modify(Activity activity);
+    public Activity getActivityByID(int id);
     public List<Activity> fetchAll();
 }

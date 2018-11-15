@@ -113,12 +113,24 @@
             $('#submit').text(this.form.button_text);
             this.view.isDisableButton = false;
             this.view.is_check = this.view.flagMap.max;//将按钮设置为可用
-            if (response.data.status === 1) {
+            let code = response.data.status;
+            if (code === 1) {
               toastr.success('报名成功 ^-^');
-            } else {
-              toastr.warning(response.data.result);
-
+            }else if (code === 2){
+              toastr.warning('我猜你已经报过名了')
+            }  else if(code === 3){
+              toastr.warning('请先进行学号校验');
+              this.$router.push('/');
             }
+            else {
+              toastr.warning(response.data.result);
+            }
+            this.view.isDisableButton = true;
+            this.view.is_check = -1; // 防止在响应过程中用户通过修改输入框的事件将按钮又设置为可用
+            $('#submit').text('即将跳转...');
+            setTimeout(()=>{
+              this.$router.push('/info');
+            },1000)
           })
           .catch((error) => {
             $('#submit').text(this.form.button_text);
@@ -126,6 +138,9 @@
             this.view.is_check = this.view.flagMap.max;//将按钮设置为可用
             toastr.error('服务器异常 >_<');
             console.log(error);
+            setTimeout(()=>{
+              this.$router.push('/');
+            },1000)
           })
           .finally(() => {
             $('#submit').text(this.form.button_text);

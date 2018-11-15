@@ -17,7 +17,7 @@
         <result column="mobile" jdbcType="VARCHAR" property="mobile"/>
     </resultMap>
     <sql id="Base_Column_List">
-    id, student_no, process_id, is_vaild, cn_name, passwd, sex, birthday, province, college, 
+    id, student_no, process_id, is_vaild, cn_name, passwd, sex, birthday, province, college,
     dept, admin_class, mobile
   </sql>
     <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
@@ -34,8 +34,11 @@
         ORDER BY rand() LIMIT 1
     </select>
     <!--就写了一句-->
-    <select id="selectByNo" parameterType="java.lang.String" resultType="java.lang.Integer">
-        SELECT id FROM `join` WHERE student_no = #{no}
+    <select id="selectByNo" parameterType="java.lang.String" resultMap="BaseResultMap">
+        select
+        <include refid="Base_Column_List"/>
+        from `join`
+        where student_no = #{no}
     </select>
 
     <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
@@ -44,14 +47,14 @@
   </delete>
     <insert id="insert" parameterType="org.xiyoulinux.recruitment.model.po.Join">
     insert into `join` (id, student_no, process_id,
-      is_vaild, cn_name, passwd, 
-      sex, birthday, province, 
-      college, dept, admin_class, 
+      is_vaild, cn_name, passwd,
+      sex, birthday, province,
+      college, dept, admin_class,
       mobile)
-    values (#{id,jdbcType=INTEGER}, #{student_no,jdbcType=CHAR}, #{process_id,jdbcType=INTEGER}, 
-      #{is_vaild,jdbcType=BIT}, #{cn_name,jdbcType=VARCHAR}, #{passwd,jdbcType=VARCHAR}, 
-      #{sex,jdbcType=CHAR}, #{birthday,jdbcType=DATE}, #{province,jdbcType=VARCHAR}, 
-      #{college,jdbcType=VARCHAR}, #{dept,jdbcType=VARCHAR}, #{admin_class,jdbcType=VARCHAR}, 
+    values (#{id,jdbcType=INTEGER}, #{student_no,jdbcType=CHAR}, #{process_id,jdbcType=INTEGER},
+      #{is_vaild,jdbcType=BIT}, #{cn_name,jdbcType=VARCHAR}, #{passwd,jdbcType=VARCHAR},
+      #{sex,jdbcType=CHAR}, #{birthday,jdbcType=DATE}, #{province,jdbcType=VARCHAR},
+      #{college,jdbcType=VARCHAR}, #{dept,jdbcType=VARCHAR}, #{admin_class,jdbcType=VARCHAR},
       #{mobile,jdbcType=VARCHAR})
   </insert>
     <insert id="insertSelective" parameterType="org.xiyoulinux.recruitment.model.po.Join">

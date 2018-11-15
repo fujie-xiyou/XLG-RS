@@ -13,7 +13,7 @@ public interface JoinDAO {
 
     Join selectRand();
 
-    Integer selectByNo(String no);
+    Join selectByNo(String no);
 
     int updateByPrimaryKeySelective(Join record);
 

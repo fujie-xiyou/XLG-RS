@@ -31,4 +31,9 @@ public class SignUpNewController {
     public ResponseResult checkUser(HttpServletRequest request ,@RequestBody Join join ){
         return signService.checkUser(request,join);
     }
+
+    @RequestMapping(value = "/info",method = RequestMethod.GET)
+    public ResponseResult getInfo(HttpServletRequest request){
+        return signService.getInfo(request);
+    }
 }

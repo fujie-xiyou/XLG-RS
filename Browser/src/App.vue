@@ -7,7 +7,8 @@
     name: 'App',
     data() {
       return {
-        host: 'http://xiyoulinux.org:8080/join',
+        // host: 'http://xiyoulinux.org:8080/join',
+        host: 'http://localhost:8080',
         activity: {
           act_name: '2019纳新',
           grades: [2015, 2016, 2017, 2018],

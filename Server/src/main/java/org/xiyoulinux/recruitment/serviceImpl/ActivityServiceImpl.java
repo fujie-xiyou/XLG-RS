@@ -27,6 +27,11 @@ public class ActivityServiceImpl implements ActivityService {
     }
 
     @Override
+    public Activity getActivityByID(int id) {
+        return activityDAO.selectByPrimaryKey(id);
+    }
+
+    @Override
     public List<Activity> fetchAll() {
         return null;
     }

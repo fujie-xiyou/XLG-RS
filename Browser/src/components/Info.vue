@@ -1,29 +1,24 @@
 <template>
   <div id="info" class="form-sign">
     <form class="form-sign">
-      <img class="logo" src="../assets/xiyoulinux.png" alt="" width="45%">
+      <img class="logo" src="../assets/xiyoulinux.png" alt="" width="40%">
       <h1 class="h4 mb-4 font-weight-normal">西邮Linux兴趣小组<br/>{{view.title}}</h1>
-      <div class="row">
-        <div class="col-5">学号：</div>
-        <div class="col">{{info.student_no}}</div>
+      <div class="card" style="width: 100%;">
+        <div class="card-body">
+          <h5 class="card-title">面试状态</h5>
+          <p class="card-text">{{info.process_id}}</p>
+        </div>
+        <ul class="list-group list-group-flush">
+          <li class="list-group-item">{{info.admin_class}}</li>
+          <li class="list-group-item">{{info.cn_name}}</li>
+          <li class="list-group-item">{{info.mobile}}</li>
+        </ul>
       </div>
-      <div class="row">
-        <div class="col-5">姓名：</div>
-        <div class="col">{{info.cn_name}}</div>
-      </div>
-      <div class="row">
-        <div class="col-5">班级：</div>
-        <div class="col">{{info.admin_class}}</div>
-      </div>
-      <div class="row">
-        <div class="col-5">手机号：</div>
-        <div class="col">{{info.mobile}}<a href="">修改</a></div>
-      </div>
-      <div class="row">
-        <div class="col-5">面试状态：</div>
-        <div class="col status">{{info.status}}</div>
-      </div>
+      <br/>
+      <button type="button" class="btn btn-danger btn-lg btn-block">注销</button>
+
     </form>
+
 
   </div>
 </template>
@@ -34,9 +29,15 @@
     data() {
       return {
         view: {
-          title: this.activity.act_name + "状态查询",
+          title: this.activity.act_name,
         },
-        info: null,
+        info: {
+          admin_class: "加载中..",
+          cn_name: "加载中..",
+          mobile: "加载中..",
+          process_id: '加载中..',
+          student_no: "加载中.."
+        },
       }
     },
     methods: {
@@ -50,10 +51,10 @@
         this.$axios.post(this.host + '/info', fd, config)
           .then((response) => {
             console.log(response);
-            if (response.data.status.statusCode === 1) {
+            if (response.data.status === 1) {
               toastr.success('修改成功 ^-^');
             } else {
-              response.data.status.reasons.forEach((reason) => {
+              response.data.result.forEach((reason) => {
                 toastr.error(reason);
               })
             }
@@ -70,29 +71,24 @@
       toastr.options.positionClass = 'toast-top-center';
       document.title = '西邮Linux兴趣小组' + this.view.title;
     },
-    beforeMount(){
-      /*  this.$axios.get(this.host+'/info')
-    .then((response) =>{
-      if(response.data.status.statusCode === 1){
-        this.info = response.data.result;
-      }else {
-        response.data.status.reasons.forEach((reason) => {
-          toastr.error(reason);
+    beforeMount() {
+      this.$axios.get(this.host + '/info')
+        .then((response) => {
+          console.log(response);
+          if (response.data.status === 1) {
+            this.info = response.data.result;
+          } else {
+            toastr.error(response.data.result);
+            setTimeout(()=>{
+              this.$router.push('/');
+
+            },1000)
+          }
+        })
+        .catch((error) => {
+          toastr.error('服务器异常 >_<');
+          console.log(error);
         });
-      }
-    })
-    .catch((error) =>{
-      toastr.error('服务器异常 >_<')
-      console.log(error);
-    })
-*/
-      this.info = {
-        student_no: '04163028',
-        cn_name: '刘付杰',
-        admin_class: '软件1601',
-        mobile: '15596207601',
-        status: '三面通过'
-      }
     }
   }
 </script>
@@ -102,11 +98,4 @@
     margin-bottom: 1.5rem;
   }
 
-  .row {
-    text-align: left;
-  }
-
-  .col.status {
-    color: red;
-  }
 </style>

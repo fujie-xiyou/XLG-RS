@@ -9,4 +9,5 @@ import javax.servlet.http.HttpServletRequest;
 public interface SignService {
     public ResponseResult signUp(HttpServletRequest request,String mobile);
     public ResponseResult checkUser(HttpServletRequest request , Join join);
+    public ResponseResult getInfo(HttpServletRequest request);
 }

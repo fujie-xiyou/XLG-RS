@@ -127,7 +127,11 @@
             if (response.data.status === 1) {
               //学号密码校验通过 并且尚未注册 跳转至手机号校验页面
               this.$router.push('/sign-up-next');
-            } else {
+            }else if(response.data.status ===2){
+              //状态码为2  表示已经报过名了  那么就跳转到个人中心
+              this.$router.push('/info');
+            }
+            else {
               toastr.warning(response.data.result)
             }
           })
