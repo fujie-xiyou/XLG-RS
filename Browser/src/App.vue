@@ -1,5 +1,5 @@
 <template>
-  <router-view :activity="activity" :host="host"/>
+  <router-view :activity="activity"/>
 </template>
 
 <script>
@@ -7,11 +7,9 @@
     name: 'App',
     data() {
       return {
-        // host: 'http://xiyoulinux.org:8080/join',
-        host: 'http://localhost:8080',
         activity: {
           act_name: '2019纳新',
-          grades: [2015, 2016, 2017, 2018],
+          grades: [2017, 2018],
           readme: `
             0. 您填写的手机号将作为通知您面试时间地点的唯一方式,我们保证不会用于其他用途,请您务必正确填写。<br/><br/>
             1. 一旦您勾选界面上的<span style="color: red"> "授权我们记录您的姓名和班级信息"</span>,就意味着我们从教务系统平台上获取并且记录您的姓名以及班级信息是合法的,同时我们承诺,绝对不会获取除此之外的任何信息,请您放心报名。<br/><br/>

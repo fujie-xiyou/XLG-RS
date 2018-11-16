@@ -164,8 +164,9 @@
         .then((response) => {
           if(response.data.status !== 1){
             // from.$router.push('/');
+            next('/');
           }
-          next('/');
+          next();
         })
     }
   }

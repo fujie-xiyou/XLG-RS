@@ -20,6 +20,8 @@
 </template>
 
 <script>
+  import {axios,host} from '../config'
+
   export default {
     name: "SignUp",
     data() {
@@ -118,9 +120,8 @@
           }
 
         };
-        this.$axios.post(this.host + '/checkUser', join, config)
+        axios.post(host + '/checkUser', join, config)
           .then((response) => {
-            console.log(response);
             $('#submit').text(this.form.button_text);
             this.view.isDisableButton = false;
             this.view.is_check = this.view.flagMap.max;//将按钮设置为可用

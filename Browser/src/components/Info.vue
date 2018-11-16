@@ -24,6 +24,8 @@
 </template>
 
 <script>
+  import {axios,host} from '../config'
+
   export default {
     name: "Info",
     data() {
@@ -48,7 +50,7 @@
             'Content-Type': 'application/x-www-form-urlencoded'
           }
         };
-        this.$axios.post(this.host + '/info', fd, config)
+        axios.post(host + '/info', fd, config)
           .then((response) => {
             console.log(response);
             if (response.data.status === 1) {
@@ -72,9 +74,8 @@
       document.title = '西邮Linux兴趣小组' + this.view.title;
     },
     beforeMount() {
-      this.$axios.get(this.host + '/info')
+      axios.get(host + '/info')
         .then((response) => {
-          console.log(response);
           if (response.data.status === 1) {
             this.info = response.data.result;
           } else {
