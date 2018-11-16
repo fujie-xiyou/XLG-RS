@@ -20,6 +20,9 @@ public class ResponseResult<T> {
     public ResponseResult(){
         this(null);
     }
+    public ResponseResult(int status){
+        this(status,null);
+    }
 
     public ResponseResult(T result){
         this(1,result);
