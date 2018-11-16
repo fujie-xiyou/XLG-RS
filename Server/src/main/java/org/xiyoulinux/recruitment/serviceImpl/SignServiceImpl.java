@@ -73,7 +73,7 @@ public class SignServiceImpl implements SignService {
             join.setAdmin_class(jsonObject.getString("bh_id"));
             join.setCn_name(jsonObject.getString("xm"));
             join.setPasswd(null);
-            join.setProcess_id(0);
+            join.setProcess_id(1);
             join.setIs_vaild(true);
             request.getSession().setAttribute("join", join);
             request.getSession().setAttribute("notSign", "zqn");
