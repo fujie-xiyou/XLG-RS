@@ -20,6 +20,18 @@ public class SignServiceImpl implements SignService {
     private JoinDAO joinDAO;
 
     @Override
+    public ResponseResult isCanSign(HttpServletRequest request) {
+        Join join = (Join) request.getSession().getAttribute("join");
+        if (join == null) {
+            return new ResponseResult(3);
+        }
+        if (request.getSession().getAttribute("notSign") == null) {
+            return new ResponseResult(2);
+        }
+        return new ResponseResult();
+    }
+
+    @Override
     public ResponseResult signUp(HttpServletRequest request, String mobile) {
         Join join = (Join) request.getSession().getAttribute("join");
         if (join == null) {

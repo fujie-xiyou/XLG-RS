@@ -36,4 +36,9 @@ public class SignUpNewController {
     public ResponseResult getInfo(HttpServletRequest request){
         return signService.getInfo(request);
     }
+    @RequestMapping(value = "isCanSign" ,method = RequestMethod.GET)
+    public ResponseResult isCanSign(HttpServletRequest request){
+        return signService.isCanSign(request);
+    }
+
 }
