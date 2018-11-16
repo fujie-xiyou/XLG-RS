@@ -44,6 +44,7 @@
 </template>
 
 <script>
+  import {axios,host} from '../config'
   export default {
     name: "SignUpNext",
     data() {
@@ -107,7 +108,7 @@
           }
 
         };
-        this.$axios.post(this.host + '/signUpNew', fd, config)
+        axios.post(host + '/signUpNew', fd, config)
           .then((response) => {
             //console.log(response);
             $('#submit').text(this.form.button_text);
@@ -158,6 +159,15 @@
       toastr.options.positionClass = 'toast-top-center';
       document.title = '西邮Linux兴趣小组' + this.view.title;
     },
+    beforeRouteEnter(to,from,next){
+      axios.get(host + '/isCanSign')
+        .then((response) => {
+          if(response.data.status !== 1){
+            // from.$router.push('/');
+          }
+          next('/');
+        })
+    }
   }
 </script>
 
