@@ -92,7 +92,7 @@ public class SignServiceImpl implements SignService {
         } else if (request.getSession().getAttribute("notSign") != null) {
             return new ResponseResult<String>(0, "尚未报名");
         } else {
-            Join join1 = joinDAO.selectByPrimaryKey(join.getId());
+            Join join1 = joinDAO.selectByNo(join.getStudent_no());
             System.out.println(join1);
             return new ResponseResult<Join>(join1);
         }

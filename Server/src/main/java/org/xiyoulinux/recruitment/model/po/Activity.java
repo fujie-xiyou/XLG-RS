@@ -9,6 +9,10 @@ public class Activity {
 
     private Integer process_id;
 
+    private String readme;
+
+    private int[] grades;
+
     public Integer getId() {
         return id;
     }
@@ -39,5 +43,21 @@ public class Activity {
 
     public void setProcess_id(Integer process_id) {
         this.process_id = process_id;
+    }
+
+    public String getReadme() {
+        return readme;
+    }
+
+    public void setReadme(String readme) {
+        this.readme = readme;
+    }
+
+    public int[] getGrades() {
+        return grades;
+    }
+
+    public void setGrades(int[] grades) {
+        this.grades = grades;
     }
 }

@@ -1,14 +1,15 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="org.xiyoulinux.recruitment.dao.ActivityDAO">
-  <resultMap id="BaseResultMap" type="org.xiyoulinux.recruitment.model.vo.Activity">
+  <resultMap id="BaseResultMap" type="org.xiyoulinux.recruitment.model.po.Activity">
     <id column="id" jdbcType="INTEGER" property="id" />
     <result column="act_name" jdbcType="VARCHAR" property="act_name" />
     <result column="act_time" jdbcType="VARCHAR" property="act_time" />
     <result column="process_id" jdbcType="INTEGER" property="process_id" />
+    <result column="readme" jdbcType="VARCHAR" property="readme" />
   </resultMap>
   <sql id="Base_Column_List">
-    id, act_name, act_time, process_id
+    id, act_name, act_time, process_id,readme
   </sql>
   <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
     select
@@ -16,17 +17,20 @@
     from activity
     where id = #{id,jdbcType=INTEGER}
   </select>
+  <select id="selectGradesByActivityID" parameterType="java.lang.Integer">
+
+  </select>
   <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
     delete from activity
     where id = #{id,jdbcType=INTEGER}
   </delete>
-  <insert id="insert" parameterType="org.xiyoulinux.recruitment.model.vo.Activity">
+  <insert id="insert" parameterType="org.xiyoulinux.recruitment.model.po.Activity">
     insert into activity (id, act_name, act_time,
       process_id)
     values (#{id,jdbcType=INTEGER}, #{act_name,jdbcType=VARCHAR}, #{act_time,jdbcType=VARCHAR},
       #{process_id,jdbcType=INTEGER})
   </insert>
-  <insert id="insertSelective" keyProperty="id" parameterType="org.xiyoulinux.recruitment.model.vo.Activity">
+  <insert id="insertSelective" keyProperty="id" parameterType="org.xiyoulinux.recruitment.model.po.Activity">
     insert into activity
     <trim prefix="(" suffix=")" suffixOverrides=",">
       <if test="id != null">
@@ -57,7 +61,7 @@
       </if>
     </trim>
   </insert>
-  <update id="updateByPrimaryKeySelective" parameterType="org.xiyoulinux.recruitment.model.vo.Activity">
+  <update id="updateByPrimaryKeySelective" parameterType="org.xiyoulinux.recruitment.model.po.Activity">
     update activity
     <set>
       <if test="act_name != null">
@@ -72,7 +76,7 @@
     </set>
     where id = #{id,jdbcType=INTEGER}
   </update>
-  <update id="updateByPrimaryKey" parameterType="org.xiyoulinux.recruitment.model.vo.Activity">
+  <update id="updateByPrimaryKey" parameterType="org.xiyoulinux.recruitment.model.po.Activity">
     update activity
     set act_name = #{act_name,jdbcType=VARCHAR},
       act_time = #{act_time,jdbcType=VARCHAR},
