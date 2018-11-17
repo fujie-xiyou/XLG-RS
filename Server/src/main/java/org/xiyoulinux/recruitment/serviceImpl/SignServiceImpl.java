@@ -33,19 +33,22 @@ public class SignServiceImpl implements SignService {
 
     @Override
     public ResponseResult signUp(HttpServletRequest request, String mobile) {
+        if(!mobile.matches("^(13[0-9]|14[579]|15[0-3,5-9]|16[6]|17[0135678]|18[0-9]|19[89])\\d{8}$")){
+            return new ResponseResult<>("输入不合法");
+        }
         Join join = (Join) request.getSession().getAttribute("join");
         if (join == null) {
-            return new ResponseResult<String>(3, "请先检验学号密码");
+            return new ResponseResult<>(3, "请先检验学号密码");
         }
         if (request.getSession().getAttribute("notSign") == null) {
-            return new ResponseResult<String>(2, "我猜你已经报过名了");
+            return new ResponseResult<>(2, "我猜你已经报过名了");
         }
         join.setMobile(mobile);
         if (joinDAO.insertSelective(join) > 0) {
             request.getSession().removeAttribute("notSign");
             return new ResponseResult();
         } else {
-            return new ResponseResult<String>(0, "服务器异常..");
+            return new ResponseResult<>(0, "服务器异常..");
         }
     }
 
@@ -53,6 +56,9 @@ public class SignServiceImpl implements SignService {
     public ResponseResult checkUser(HttpServletRequest request, Join join) {
         String sno = join.getStudent_no();
         String passwd = join.getPasswd();
+        if (!checkSnoAndPass(join)){
+            return new ResponseResult<>(0,"输入不合法");
+        }
         request.getSession().invalidate();
         ConnectJWGL jw = new ConnectJWGL(sno, passwd);
         org.xiyoulinux.recruitment.untils.getStuInfo.ResponseResult liMengResult = null;
@@ -66,7 +72,7 @@ public class SignServiceImpl implements SignService {
             //当学号密码校验通过后才能得知是否已经报过名
             if (joinFromDB != null) {
                 request.getSession().setAttribute("join", joinFromDB);
-                return new ResponseResult<String>(2, "你已经报过名啦！");
+                return new ResponseResult<>(2, "你已经报过名啦！");
                 //返回2唯一代表已经报过名！！！
             }
             JSONObject jsonObject = JSON.parseObject(liMengResult.getData().toString());
@@ -79,7 +85,7 @@ public class SignServiceImpl implements SignService {
             request.getSession().setAttribute("notSign", "zqn");
             return new ResponseResult();
         } else {
-            return new ResponseResult<String>(0, (String) liMengResult.getData());
+            return new ResponseResult<>(0, (String) liMengResult.getData());
         }
     }
 
@@ -88,13 +94,16 @@ public class SignServiceImpl implements SignService {
         Join join = (Join) request.getSession().getAttribute("join");
 
         if (join == null) {
-            return new ResponseResult<String>(0, "尚未登录");
+            return new ResponseResult<>(0, "尚未登录");
         } else if (request.getSession().getAttribute("notSign") != null) {
-            return new ResponseResult<String>(0, "尚未报名");
+            return new ResponseResult<>(0, "尚未报名");
         } else {
             Join join1 = joinDAO.selectByNo(join.getStudent_no());
             System.out.println(join1);
-            return new ResponseResult<Join>(join1);
+            return new ResponseResult<>(join1);
         }
+    }
+    private boolean checkSnoAndPass(Join join){
+        return  join.getStudent_no().matches("^[01]\\d(\\d{2})\\d{4}$") && join.getPasswd().matches(".{6,26}");
     }
 }
