@@ -69,19 +69,19 @@
       parseStatus(status) {
         switch (status) {
           case 0: return "<span style='color: orange'>面试结果待定</span>";
-          case 1: return "<span style='color: orange'>报名成功，等待一面</span>";
-          case -1: return "<span style='color: red'>一面未通过</span>";
-          case 2: return "一面通过，等待二面";
-          case -2: return "<span style='color: red'>二面未通过</span>";
-          case 3: return "二面通过，等待三面";
-          case -3: return "<span style='color: red'>三面未通过</span>";
-          case 4: return "<span style='color: darkgreen'>三面通过，面试完成</span>";
+          case 1: return "<span style='color: orange'>报名成功，等待A面</span>";
+          case -1: return "<span style='color: red'>A面未通过</span>";
+          case 2: return "<span style='color: darkgreen'>A面通过，等待C面</span>";
+          case -2: return "<span style='color: red'>B面未通过</span>";
+          case 3: return "<span style='color: darkgreen'>C面通过，等待D面</span>";
+          case -3: return "<span style='color: red'>D面未通过</span>";
+          case 4: return "<span style='color: darkgreen'>D面通过，面试完成</span>";
           default : return "加载中.."
         }
       }
 
     },
-    props: ['host', 'activity'],
+    props: ['activity'],
     mounted() {
       toastr.options.positionClass = 'toast-top-center';
       document.title = '西邮Linux兴趣小组' + this.view.title;

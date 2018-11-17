@@ -155,7 +155,6 @@
     },
     props: ['host', 'activity'],
     mounted() {
-      $('#exampleModal').modal({show: true});
       toastr.options.positionClass = 'toast-top-center';
       document.title = '西邮Linux兴趣小组' + this.view.title;
     },
