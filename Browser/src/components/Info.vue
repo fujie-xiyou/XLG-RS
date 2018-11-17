@@ -1,5 +1,20 @@
 <template>
   <div id="info" class="form-sign">
+    <!-- Modal -->
+    <div class="modal fade" id="confirmLogout" tabindex="-1" role="dialog" aria-labelledby="confirmLogoutTitle" aria-hidden="true">
+      <div class="modal-dialog modal-dialog-centered " role="document">
+        <div class="modal-content">
+
+          <div class="modal-body">
+            <h5>确认注销吗？</h5>
+          </div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-secondary" data-dismiss="modal">取消</button>
+            <button type="button" class="btn btn-danger" @click="logout">确认</button>
+          </div>
+        </div>
+      </div>
+    </div>
     <form class="form-sign">
       <img class="logo" src="../assets/xiyoulinux.png" alt="" width="40%">
       <h1 class="h4 mb-4 font-weight-normal">西邮Linux兴趣小组<br/>{{view.title}}</h1>
@@ -15,11 +30,8 @@
         </ul>
       </div>
       <br/>
-      <button type="button" class="btn btn-danger btn-lg btn-block">注销</button>
-
+      <button type="button" class="btn btn-danger btn-lg btn-block" data-toggle="modal" data-target="#confirmLogout">注销</button>
     </form>
-
-
   </div>
 </template>
 
@@ -65,6 +77,20 @@
             toastr.error('服务器异常 >_<');
             console.log(error);
           });
+      },
+      logout(){
+        axios.get(host + '/logout')
+          .then((response) => {
+            if(response.data.status === 1){
+              toastr.success('注销成功');
+              setTimeout(()=>{
+                this.$router.push('/');
+              },1000);
+            }
+          })
+          .catch((error) => {
+            toastr.error('服务器异常');
+          })
       },
       parseStatus(status) {
         switch (status) {

@@ -1,6 +1,7 @@
 package org.xiyoulinux.recruitment.web;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
+import org.springframework.http.HttpRequest;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 import org.xiyoulinux.recruitment.model.po.Join;
@@ -39,6 +40,11 @@ public class SignUpNewController {
     @RequestMapping(value = "isCanSign" ,method = RequestMethod.GET)
     public ResponseResult isCanSign(HttpServletRequest request){
         return signService.isCanSign(request);
+    }
+    @RequestMapping(value = "logout", method = RequestMethod.GET)
+    public ResponseResult logout(HttpServletRequest request){
+        request.getSession().invalidate();
+        return new ResponseResult();
     }
 
 }
