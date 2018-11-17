@@ -10,7 +10,7 @@
           </div>
           <div class="modal-footer">
             <button type="button" class="btn btn-secondary" data-dismiss="modal">取消</button>
-            <button type="button" class="btn btn-danger" @click="logout">确认</button>
+            <button type="button" class="btn btn-danger" data-dismiss="modal" @click="logout">确认</button>
           </div>
         </div>
       </div>
