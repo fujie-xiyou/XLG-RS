@@ -20,7 +20,7 @@
 </template>
 
 <script>
-  import {axios,host} from '../config'
+  import {axios,host} from '../../static/js/config'
 
   export default {
     name: "SignUp",

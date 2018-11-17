@@ -1,7 +1,7 @@
 import axios from 'axios'
 axios.defaults.withCredentials=true;//让ajax携带cookie
 
-let host = 'http://localhost:8080';
+let host = 'http://xiyoulinux.org:8080/join';
 
 
 export {axios,host}
