@@ -105,8 +105,6 @@
       },
       submit() {
 
-        //copy from 教务系统源代码
-        //获取公钥 对密码进行加密
         var modulus, exponent;
         this.view.isDisableButton = true;
         this.view.is_check = -1; // 防止在响应过程中用户通过修改输入框的事件将按钮又设置为可用

@@ -107,6 +107,7 @@
             console.log(response);
             if (response.data.status === 1) {
               toastr.success('修改成功 ^-^');
+              this.view.isDisableButton = true;
             } else {
                 toastr.error(response.data.result);
             }
