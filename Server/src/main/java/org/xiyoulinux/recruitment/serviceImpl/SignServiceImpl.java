@@ -12,7 +12,10 @@ import org.xiyoulinux.recruitment.untils.ResponseResult;
 import org.xiyoulinux.recruitment.untils.ResponseStatus;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
 import java.sql.SQLException;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 @Service("SignSevice")
 public class SignServiceImpl implements SignService {
@@ -33,7 +36,7 @@ public class SignServiceImpl implements SignService {
 
     @Override
     public ResponseResult signUp(HttpServletRequest request, String mobile) {
-        if(!mobile.matches("^(13[0-9]|14[579]|15[0-3,5-9]|16[6]|17[0135678]|18[0-9]|19[89])\\d{8}$")){
+        if (!checkMobile(mobile)) {
             return new ResponseResult<>("输入不合法");
         }
         Join join = (Join) request.getSession().getAttribute("join");
@@ -56,8 +59,8 @@ public class SignServiceImpl implements SignService {
     public ResponseResult checkUser(HttpServletRequest request, Join join) {
         String sno = join.getStudent_no();
         String passwd = join.getPasswd();
-        if (!checkSnoAndPass(join)){
-            return new ResponseResult<>(0,"输入不合法");
+        if (!checkSnoAndPass(join)) {
+            return new ResponseResult<>(0, "输入不合法");
         }
         request.getSession().invalidate();
         ConnectJWGL jw = new ConnectJWGL(sno, passwd);
@@ -99,11 +102,43 @@ public class SignServiceImpl implements SignService {
             return new ResponseResult<>(0, "尚未报名");
         } else {
             Join join1 = joinDAO.selectByNo(join.getStudent_no());
-            System.out.println(join1);
             return new ResponseResult<>(join1);
         }
     }
-    private boolean checkSnoAndPass(Join join){
-        return  join.getStudent_no().matches("^[01]\\d(\\d{2})\\d{4}$") && join.getPasswd().matches(".{6,26}");
+    @Override
+    public ResponseResult modifyMobile(HttpSession session, String mobile) {
+        if (!checkMobile(mobile)) {
+            return new ResponseResult<>("输入不合法");
+        }
+        Join join = (Join) session.getAttribute("join");
+        if (join == null) {
+            return new ResponseResult<>(0, "尚未登录");
+        } else if (session.getAttribute("notSign") != null) {
+            return new ResponseResult<>(0, "尚未报名");
+        } else {
+            if(joinDAO.updateMobileByNo(mobile,join.getStudent_no()) > 0){
+                return new ResponseResult<>();
+            }else {
+                return new ResponseResult<>("服务器异常");
+            }
+        }
     }
+
+
+    private boolean checkSnoAndPass(Join join) {
+        Matcher matcher = Pattern.compile("^[01]\\d(\\d{2})\\d{4}$").matcher(join.getStudent_no());
+        if (matcher.matches()) {
+            int grade = Integer.parseInt(matcher.group(1));
+            //TODO 超高耦合度  迟早GG
+            if (grade > 18 || grade < 17) {
+                return false;
+            }
+        }
+        return join.getPasswd().matches(".{6,26}");
+    }
+
+    private boolean checkMobile(String mobile) {
+        return mobile.matches("^(13[0-9]|14[579]|15[0-3,5-9]|16[6]|17[0135678]|18[0-9]|19[89])\\d{8}$");
+    }
+
 }

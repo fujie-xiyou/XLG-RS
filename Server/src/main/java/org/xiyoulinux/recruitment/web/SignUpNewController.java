@@ -8,6 +8,7 @@ import org.xiyoulinux.recruitment.model.po.Join;
 import org.xiyoulinux.recruitment.service.SignService;
 import org.xiyoulinux.recruitment.untils.*;
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
 import java.io.UnsupportedEncodingException;
 
 
@@ -36,6 +37,10 @@ public class SignUpNewController {
     @RequestMapping(value = "/info",method = RequestMethod.GET)
     public ResponseResult getInfo(HttpServletRequest request){
         return signService.getInfo(request);
+    }
+    @RequestMapping(value = "/info",method = RequestMethod.POST)
+    public ResponseResult modifyMobile(HttpSession session,@RequestParam("mobile") String mobile){
+        return signService.modifyMobile(session,mobile);
     }
     @RequestMapping(value = "isCanSign" ,method = RequestMethod.GET)
     public ResponseResult isCanSign(HttpServletRequest request){

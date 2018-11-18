@@ -1,5 +1,6 @@
 package org.xiyoulinux.recruitment.dao;
 
+import org.apache.ibatis.annotations.Param;
 import org.xiyoulinux.recruitment.model.po.Join;
 
 public interface JoinDAO {
@@ -14,6 +15,8 @@ public interface JoinDAO {
     Join selectRand();
 
     Join selectByNo(String no);
+
+    int updateMobileByNo(@Param("mobile") String mobile, @Param("no") String no);
 
     int updateByPrimaryKeySelective(Join record);
 

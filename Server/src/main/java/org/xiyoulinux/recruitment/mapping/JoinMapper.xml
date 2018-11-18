@@ -40,7 +40,11 @@
         from `join`
         where student_no = #{no}
     </select>
-
+    <update id="updateMobileByNo">
+    update `join`
+    set mobile = #{mobile}
+    where student_no = #{no}
+  </update>
     <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
     delete from `join`
     where id = #{id,jdbcType=INTEGER}
