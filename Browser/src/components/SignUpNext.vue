@@ -117,8 +117,20 @@
             let code = response.data.status;
             if (code === 1) {
               toastr.success('报名成功 ^-^');
+              this.view.isDisableButton = true;
+              this.view.is_check = -1; // 防止在响应过程中用户通过修改输入框的事件将按钮又设置为可用
+              $('#submit').text('即将跳转...');
+              setTimeout(()=>{
+                this.$router.push('/info');
+              },1000)
             }else if (code === 2){
               toastr.warning('我猜你已经报过名了')
+              this.view.isDisableButton = true;
+              this.view.is_check = -1; // 防止在响应过程中用户通过修改输入框的事件将按钮又设置为可用
+              $('#submit').text('即将跳转...');
+              setTimeout(()=>{
+                this.$router.push('/info');
+              },1000)
             }  else if(code === 3){
               toastr.warning('请先进行学号校验');
               this.$router.push('/');
@@ -126,12 +138,7 @@
             else {
               toastr.warning(response.data.result);
             }
-            this.view.isDisableButton = true;
-            this.view.is_check = -1; // 防止在响应过程中用户通过修改输入框的事件将按钮又设置为可用
-            $('#submit').text('即将跳转...');
-            setTimeout(()=>{
-              this.$router.push('/info');
-            },1000)
+
           })
           .catch((error) => {
             $('#submit').text(this.form.button_text);
@@ -163,10 +170,10 @@
       axios.get(host + '/isCanSign')
         .then((response) => {
           if(response.data.status !== 1){
-            // from.$router.push('/');
             next('/');
+          }else {
+            next();
           }
-          next();
         })
     }
   }
