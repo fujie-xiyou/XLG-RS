@@ -16,6 +16,9 @@ import org.xiyoulinux.recruitment.untils.ResponseStatus;
 import javax.servlet.http.HttpServletRequest;
 @Controller
 @ResponseBody
+/**
+ * @author fujie
+ */
 public class SignUpController {
     @Autowired
     private JoinDAO joinDAO;

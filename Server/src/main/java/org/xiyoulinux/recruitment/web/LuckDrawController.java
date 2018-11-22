@@ -10,6 +10,10 @@ import org.xiyoulinux.recruitment.model.po.Join;
 
 @Controller
 @ResponseBody
+/**
+ * @author fujie
+ * @date
+ */
 public class LuckDrawController {
     @Autowired
    private JoinDAO joinDAO;
