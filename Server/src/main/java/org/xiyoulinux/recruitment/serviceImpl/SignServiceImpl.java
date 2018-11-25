@@ -62,6 +62,15 @@ public class SignServiceImpl implements SignService {
         if (!checkSnoAndPass(join)) {
             return new ResponseResult<>(0, "输入不合法");
         }
+        Join joinFromDB = joinDAO.selectByNo(sno);
+        if (joinFromDB != null) {
+            //用户通过手动途径报名 并且数据库密码匹配成功  则认为用户登录成功
+            if (joinFromDB.getPasswd() != null && joinFromDB.getPasswd().equals(passwd)) {
+                request.getSession().setAttribute("join", joinFromDB);
+                return new ResponseResult<>(2, "你已经报过名啦！");
+                //返回2唯一代表已经报过名(或者说是登录成功)！！！
+            }
+        }
         request.getSession().invalidate();
         ConnectJWGL jw = new ConnectJWGL(sno, passwd);
         org.xiyoulinux.recruitment.untils.getStuInfo.ResponseResult liMengResult = null;
@@ -70,8 +79,9 @@ public class SignServiceImpl implements SignService {
         } catch (Exception e) {
             e.printStackTrace();
         }
-        if (liMengResult.getFlag()) {//学号校验成功
-            Join joinFromDB = joinDAO.selectByNo(sno);
+        if (liMengResult.getFlag()) {
+            //学号校验成功
+
             //当学号密码校验通过后才能得知是否已经报过名
             if (joinFromDB != null) {
                 request.getSession().setAttribute("join", joinFromDB);
@@ -105,6 +115,7 @@ public class SignServiceImpl implements SignService {
             return new ResponseResult<>(join1);
         }
     }
+
     @Override
     public ResponseResult modifyMobile(HttpSession session, String mobile) {
         if (!checkMobile(mobile)) {
