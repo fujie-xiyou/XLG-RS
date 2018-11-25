@@ -134,15 +134,15 @@
       parseStatus(status) {
         switch (status) {
           case 0:
-            return "<span style='color: orange'>面试结果待定</span>";
+            return "<span style='color: orange'>A面通过，等待B面</span>";
           case 1:
             return "<span style='color: orange'>报名成功，等待A面</span>";
           case -1:
-            return "<span style='color: red'>A面未通过</span>";
+            return "<span style='color: red'>面试未通过</span>";
           case 2:
             return "<span style='color: darkgreen'>A面通过，等待C面</span>";
           case -2:
-            return "<span style='color: red'>B面未通过</span>";
+            return "<span style='color: red'>C面未通过</span>";
           case 3:
             return "<span style='color: darkgreen'>C面通过，等待D面</span>";
           case -3:
