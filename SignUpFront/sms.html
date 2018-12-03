@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="zh">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <title>面试通知</title>
+</head>
+<body onload="init()" style="text-align: center">
+<p>名单：</p>
+<textarea style="border-color:dodgerblue; resize: both; width: 90%; height: 200px" name="joins" id="joins"></textarea>
+<br/>
+<p>短信模板：</p>
+<textarea style="border-color:black; resize: both; width: 90%; height: 100px" name="context" id="context"></textarea>
+<br/>
+<button onclick="sms()">保存</button>&nbsp;&nbsp;&nbsp;<button onclick="reset()">重置</button>
+<br/><br/>
+<span style="color: red">--短信内容预览--</span>
+<div id="list"></div>
+<script>
+  let link_symbol = '';
+
+  function resetTab() {
+    document.getElementById('context').value = localStorage.context2251;
+    document.getElementById('joins').value = localStorage.joins;
+    let joins = eval('(' + localStorage.joins + ')');
+    // console.log(joins);
+    let list = document.getElementById('list');
+    let context = localStorage.context2251;
+    if (joins.length > 0) {
+      let join = joins[0];
+      list.innerHTML = `<span style="color:orange">`+eval('(' + context + ')') + `</span><br/><br/>`;
+    } else {
+      list.innerHTML = '';
+    }
+
+    joins.forEach((join, index) => {
+      list.innerHTML += `(` + (index + 1) + `)<a href="sms:` + join.mobile + link_symbol + `body=` + eval('(' + context + ')') + `">` + join.adminClass + ` ` + join.name + `</a><br/>`;
+    });
+
+  }
+
+
+  function sms() {
+    localStorage.joins = document.getElementById('joins').value;
+    localStorage.context2251 = document.getElementById('context').value;
+    resetTab();
+  }
+
+  function init() {
+    localStorage.removeItem("context");
+    let userAgent = navigator.userAgent;
+    if (userAgent.indexOf("Android") > -1 || userAgent.indexOf("Adr") > -1) {
+      link_symbol = "?";
+    }
+    else if (userAgent.indexOf("iPhone") > -1) {
+      link_symbol = "&"
+    } else {
+      alert("请使用手机访问！");
+      return;
+    }
+    if (localStorage.context2251 == null || localStorage.joins == null) {
+      reset();
+    } else {
+      resetTab();
+    }
+  }
+
+  function reset() {
+    localStorage.context2251 = `"请你自行组织短信语言，并且邀请" + join.name + "同学于" + join.time + "来FZ103参加小组A轮面试,告知他收到回复，如果他需要调整面试时间请他回复说明"`;
+    localStorage.joins = `[
+  {
+    "adminClass": "软件1801",
+    "mobile": "15596207601",
+    "name": "刘付杰",
+    "time": "周六上午8点"
+  },
+  {
+    "adminClass": "软件1601",
+    "mobile": "15691771056",
+    "name": "娄神",
+    "time": "周六上午9点"
+  },
+  {
+    "adminClass": "中国",
+    "mobile": "10086",
+    "name": "移动",
+    "time": "周六上午10点"
+  },
+  {
+    "adminClass": "中国",
+    "mobile": "10010",
+    "name": "联通",
+    "time": "周六上午10点"
+  },
+  {
+    "adminClass": "中国",
+    "mobile": "10000",
+    "name": "电信",
+    "time": "周六上午10点"
+  }
+]`;
+    resetTab();
+  }
+
+</script>
+</body>
+</html>

@@ -34,7 +34,9 @@ public class CheckCodeServlet extends HttpServlet {
         resp.setContentType("image/gif; charset=gb2312");
         byte[] img = jw.getCheckCode();
         ServletOutputStream os = resp.getOutputStream();
-        if(img == null) System.out.println("img为空");
+        if(img == null){
+            System.out.println("img为空");
+        }
         os.write(img);
         os.flush();
         os.close();
