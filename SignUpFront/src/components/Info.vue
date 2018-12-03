@@ -5,7 +5,6 @@
          aria-hidden="true">
       <div class="modal-dialog modal-dialog-centered " role="document">
         <div class="modal-content">
-
           <div class="modal-body">
             <h5>确认注销吗？</h5>
           </div>
@@ -42,7 +41,7 @@
       </div>
       <br/>
       <button type="button" class="btn btn-danger btn-lg btn-block" data-toggle="modal" data-target="#confirmLogout">
-        注销
+        注销登录
       </button>
     </div>
   </div>
@@ -134,7 +133,7 @@
       parseStatus(status) {
         switch (status) {
           case 0:
-            return "<span style='color: orange'>A面通过，等待B面</span>";
+            return "<span style='color: forestgreen'>A面通过，等待B面</span>";
           case 1:
             return "<span style='color: orange'>报名成功，等待A面</span>";
           case -1:
