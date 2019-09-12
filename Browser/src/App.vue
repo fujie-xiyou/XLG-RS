@@ -10,7 +10,7 @@ export default {
       host: 'http://xiyoulinux.org:8080/join',
       activity: {
         act_name: '第十五届软件自由日',
-        grades: [2015,2016,2017,2018],
+        grades: [2015,2016,2017,2018,2019],
         readme: `
             <span style="color: red">致歉声明： 抱歉，由于今年18级新生在教务系统(新)还没有信息记录，
             而我们之前的报名系统使用了教务系统的接口进行实名校验，导致18级同学无法进行报名，

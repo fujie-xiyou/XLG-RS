@@ -39,26 +39,6 @@ public class SignUpNewController {
         String real_name = request.getParameter("real_name");
         String admin_class = request.getParameter("admin_class");
         String passwd = request.getParameter("password");
-        System.out.println("real_name = " + real_name);
-        //String checkCode = request.getParameter("checkCode");
-        String mobile = request.getParameter("mobile");
-
-//        ConnectJWGL jw = (ConnectJWGL) request.getSession().getAttribute("JWGL");
-
-
-//        if(jw == null) {
-//            jw = new ConnectJWGL(sno,passwd);
-//            request.getSession().setAttribute("JWGL",jw);
-//        }
-//        ConnectJWGL jw = new ConnectJWGL(sno,passwd);
-//
-//        org.xiyoulinux.recruitment.untils.getStuInfo.ResponseResult liMengResult = null;
-//        try{
-//            liMengResult = jw.init();
-//        }catch (Exception e){
-//            e.printStackTrace();
-//        }
- //       if(liMengResult.getFlag()){
         String syc = null;
         try {
             syc = "https://zypc.xupt.edu.cn/oauth/xyl2018sfyz?stuno="+sno+"&realname="+ URLEncoder.encode(real_name, "utf-8");
