@@ -2,6 +2,8 @@ package org.xiyoulinux.recruitment.dao;
 
 import org.xiyoulinux.recruitment.model.po.Join;
 
+import java.util.List;
+
 public interface JoinDAO {
     int deleteByPrimaryKey(Integer id);
 
@@ -20,4 +22,6 @@ public interface JoinDAO {
     int updateByPrimaryKey(Join record);
 
     int updateIs_vaild(Boolean is_vaild);
+
+    List selectAllNo();
 }

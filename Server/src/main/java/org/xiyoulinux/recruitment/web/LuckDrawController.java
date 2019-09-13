@@ -8,6 +8,8 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.xiyoulinux.recruitment.dao.JoinDAO;
 import org.xiyoulinux.recruitment.model.po.Join;
 
+import java.util.List;
+
 @Controller
 @ResponseBody
 public class LuckDrawController {
@@ -48,5 +50,9 @@ public class LuckDrawController {
     public String luckInit(){
         joinDAO.updateIs_vaild(true);
         return "初始化成功";
+    }
+    @RequestMapping(value = "/luckAll", method = RequestMethod.GET)
+    public List luckAll(){
+        return joinDAO.selectAllNo();
     }
 }

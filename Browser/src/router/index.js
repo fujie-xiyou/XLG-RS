@@ -15,7 +15,7 @@ export default new Router({
     //   component: HelloWorld
     // },
     {
-      path: '/sign-up-new',
+      path: '/',
       name: 'SignUpNew',
       component: SignUpNew
     },

@@ -37,7 +37,9 @@
     <select id="selectByNo" parameterType="java.lang.String" resultType="java.lang.Integer">
         SELECT id FROM `join` WHERE student_no = #{no}
     </select>
-
+    <select id="selectAllNo" resultType="java.lang.String">
+        SELECT student_no FROM `join`
+    </select>
     <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
     delete from `join`
     where id = #{id,jdbcType=INTEGER}
