@@ -9,7 +9,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 public class test {
 
     @ResponseBody
-    @RequestMapping(value = "/test",method = RequestMethod.GET)
+    @RequestMapping(value = "/",method = RequestMethod.GET)
     public static String test(){
         return "Test is success!";
     }

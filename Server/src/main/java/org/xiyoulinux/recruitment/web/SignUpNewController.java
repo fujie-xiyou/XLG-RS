@@ -12,26 +12,29 @@ import org.xiyoulinux.recruitment.model.po.Join;
 import org.xiyoulinux.recruitment.untils.*;
 
 import javax.servlet.http.HttpServletRequest;
-import java.io.IOException;
-import java.io.InputStream;
-import java.io.OutputStream;
-import java.io.UnsupportedEncodingException;
+import java.io.*;
 import java.net.HttpURLConnection;
 import java.net.URL;
 import java.net.URLEncoder;
+import java.nio.charset.StandardCharsets;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
+import java.util.Map;
 
 @Controller
 @ResponseBody
 public class SignUpNewController {
     @Autowired
     private JoinDAO joinDAO;
+
     @RequestMapping(value = "/signUpNew", method = RequestMethod.POST)
-    public ResponseResult signUp(HttpServletRequest request){
+    public ResponseResult signUp(HttpServletRequest request) {
         try {
             request.setCharacterEncoding("UTF-8");
-        }catch (UnsupportedEncodingException e){
+        } catch (UnsupportedEncodingException e) {
             e.printStackTrace();
         }
         Join join = new Join();
@@ -39,89 +42,89 @@ public class SignUpNewController {
         String real_name = request.getParameter("real_name");
         String admin_class = request.getParameter("admin_class");
         String passwd = request.getParameter("password");
-        String syc = null;
+        String url = "https://api.xiyoumobile.com/xiyoulibv2/user/login/?username=" + sno + "&password=" + passwd;
+        String data = null;
         try {
-            syc = "https://zypc.xupt.edu.cn/oauth/xyl2018sfyz?stuno="+sno+"&realname="+ URLEncoder.encode(real_name, "utf-8");
-        }catch (IOException e){
-            e.printStackTrace();
+            data = doGET(url);
+        } catch (Exception e) {
+            return new ResponseResult(new ResponseStatus(e.getMessage()));
         }
-        try{
-            System.out.println(syc);
-            HttpURLConnection conn = (HttpURLConnection) new URL(syc).openConnection();
+        Map map = JSON.parseObject(data);
+        if (!(boolean) map.get("Result")) {
+            return new ResponseResult(new ResponseStatus("学号或密码不正确"));
+        }
+        String sessionId = null;
+        try {
+            sessionId = URLEncoder.encode((String) map.get("Detail"), "UTF-8");
+        } catch (UnsupportedEncodingException e) {
+            e.printStackTrace();
+            return new ResponseResult(new ResponseStatus(e.getMessage()));
+        }
+        url = "https://api.xiyoumobile.com/xiyoulibv2/user/info?session=" + sessionId;
+        try {
+            data = doGET(url);
+        } catch (Exception e) {
+            return new ResponseResult(new ResponseStatus(e.getMessage()));
+        }
+        map = JSON.parseObject(data);
+        if (!(boolean) map.get("Result")) {
+            return new ResponseResult(new ResponseStatus("获取信息失败，请稍后再试"));
+        }
+        if (joinDAO.selectByNo(sno) != null) {
+            return new ResponseResult(new ResponseStatus("你已经报过名啦!"));
+        }
+        Map info = (Map) map.get("Detail");
+        real_name = (String) info.get("Name");
+        admin_class = (String) info.get("Department");
+        join.setProcess_id(0);
+        join.setIs_vaild(true);
+        join.setStudent_no(sno);
+        join.setCn_name(real_name);
+        join.setAdmin_class(admin_class);
+        if (joinDAO.insertSelective(join) > 0) {
+            return new ResponseResult(new ResponseStatus());
+        } else {
+            return new ResponseResult(new ResponseStatus("服务器异常"));
+        }
+    }
+
+    @RequestMapping(value = "/signUpNew", method = RequestMethod.GET)
+    public String test() {
+        return "ok!";
+    }
+
+    private String doGET(String url) throws Exception {
+        InputStream is = null;
+        try {
+            HttpURLConnection conn = (HttpURLConnection) new URL(url).openConnection();
+            System.out.println(url);
             conn.setRequestMethod("GET");
-            conn.setConnectTimeout(5000);
+            conn.setConnectTimeout(10000);
             conn.setDoInput(true);
             conn.setDoOutput(true);
             conn.connect();
             int responseCode = conn.getResponseCode();
-            if(responseCode == 200){
-                InputStream is = conn.getInputStream();
+            if (responseCode == 200) {
+                is = conn.getInputStream();
+                StringBuilder buffer = new StringBuilder();
                 byte[] buff = new byte[100];
-                int off = 0, len = 0;
-                while((len = is.read(buff,off,buff.length-off)) > 0){
-                    off += len;
+                int len = 0;
+                while ((len = is.read(buff)) > 0) {
+                    buffer.append(new String(buff, 0, len, StandardCharsets.UTF_8));
                 }
-                //TODO 测试完要删除
-                // System.out.println("登录结果页面大小： "+off);
-                String data = new String(buff,"GBK");//教务系统网站采用GB系编码
-                if(data.indexOf("true",0) != -1){
-                    //学号校验成功
-                    if (joinDAO.selectByNo(sno) != null){
-                        return new ResponseResult(new ResponseStatus("你已经报过名啦!"));
-                    }
-                    join.setProcess_id(0);
-                    join.setIs_vaild(true);
-                    join.setStudent_no(sno);
-                    join.setCn_name(real_name);
-                    join.setAdmin_class(admin_class);
-                    if(joinDAO.insertSelective(join) > 0) {
-                        return new ResponseResult(new ResponseStatus());
-                    }else {
-                        return new ResponseResult(new ResponseStatus("服务器异常"));
-                    }
-                }else {
-                    return new ResponseResult(new ResponseStatus("哼，你不是"+real_name));
-                }
-
-            }else {
-                System.out.println("连接失败，HTTP响应码："+responseCode);
+                String data = buffer.toString();
+                System.out.println(data);
+                return data;
+            } else {
+                throw new Exception("HTTP Code : " + responseCode);
             }
-        }
-        catch (Exception e){
-            System.out.println("组织HTTP连接时抛出异常");
-        }
-            //当学号密码校验通过后才能得知是否已经报过名
-//            if (joinDAO.selectByNo(sno) != null){
-//                return new ResponseResult(new ResponseStatus("你已经报过名啦!"));
-//            }
-//            System.out.println(liMengResult.getData());
-//            JSONObject jsonObject = JSON.parseObject(liMengResult.getData().toString());
-//            join.setStudent_no(jsonObject.getString("xh_id"));
-//            join.setSex(jsonObject.getString("xbm").equals("男")? "boy":"girl");
-//            join.setCollege(jsonObject.getString("jg_id"));
-//            join.setAdmin_class(jsonObject.getString("bh_id"));
-//            join.setDept(jsonObject.getString("zszyh_id"));
-//            join.setCn_name(jsonObject.getString("xm"));
-//            join.setBirthday(LocalDate.parse(jsonObject.getString("csrq"),
-//                    DateTimeFormatter.ofPattern("yyyy-MM-dd")));
-//            join.setMobile(mobile);
-//            join.setPasswd(Md5Until.getMd5(passwd));
-//            join.setProcess_id(0);
-//            join.setIs_vaild(true);
-//            join.setStudent_no(sno);
-//            join.setCn_name(real_name);
-//            join.setAdmin_class(admin_class);
-//            if(joinDAO.insertSelective(join) > 0) {
-//                return new ResponseResult(new ResponseStatus());
-//            }
-//        }else {
-//            return new ResponseResult(new ResponseStatus((String)liMengResult.getData()));
-//        }
 
-
-        return new ResponseResult(new ResponseStatus("服务器异常..   " +
-                "" +
-                "" +
-                ""));
+        } catch (Exception e) {
+            e.printStackTrace();
+            throw new Exception("连接超时，请稍后再试");
+        } finally {
+            if (is != null)
+                is.close();
+        }
     }
 }
