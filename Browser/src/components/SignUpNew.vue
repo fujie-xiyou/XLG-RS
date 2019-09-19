@@ -32,7 +32,7 @@
       <h1 class="h4 mb-4 font-weight-normal">西邮Linux兴趣小组<br/>{{view.title}}</h1>
       <input type="number" id="student_no" v-model="form.student_no" @blur="checkNo" class="form-control"
              placeholder="请输入学号" required>
-      <input type="text" id="password" v-model="form.password" @input="checkPassword" class="form-control"
+      <input type="password" id="password" v-model="form.password" @input="checkPassword" class="form-control"
              placeholder="请输入图书馆系统密码"
              required>
 
@@ -88,7 +88,7 @@
                 document.getElementById(id).classList.remove('is-invalid');
             },
             checkNo() {
-                let re = /^[01]\d(\d{2})\d{4}$/;
+                let re = /^[012]\d(\d{2})\d{4}$/;
                 let arr = re.exec(this.form.student_no);
                 let maxGrade = Math.max(...this.activity.grades) - 2000;
                 let minGrade = Math.min(...this.activity.grades) - 2000;
@@ -198,7 +198,8 @@
 
   #password {
     margin-bottom: 1.5rem;
-    border-radius: 0;
+    border-top-left-radius: 0;
+    border-top-right-radius: 0;
   }
 
   #real_name {
