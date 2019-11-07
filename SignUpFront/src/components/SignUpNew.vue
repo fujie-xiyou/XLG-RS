@@ -63,7 +63,7 @@
           this.setInvalid('student_no');
           return;
         }
-        let re = /^[01]\d(\d{2})\d{4}$/;
+        let re = /^[012]\d(\d{2})\d{4}$/;
         let arr = re.exec(this.form.student_no);
         let maxGrade = Math.max(...this.activity.grades) - 2000;
         let minGrade = Math.min(...this.activity.grades) - 2000;
