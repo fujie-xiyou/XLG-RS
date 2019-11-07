@@ -40,6 +40,20 @@
         from `join`
         where student_no = #{no}
     </select>
+    <select id="selectByIdsAndProcess" resultMap="BaseResultMap">
+        select
+        <include refid="Base_Column_List"/>
+        from `join`
+        where id IN
+        <foreach collection="ids" item="id" open="(" separator="," close=")">
+            #{id}
+        </foreach>
+        AND process_id = #{process_id}
+    </select>
+    <select id="maxId" resultType="java.lang.Integer">
+        select max(id) from `join`
+    </select>
+
     <update id="updateMobileByNo">
     update `join`
     set mobile = #{mobile}

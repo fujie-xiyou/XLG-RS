@@ -3,6 +3,8 @@ package org.xiyoulinux.recruitment.dao;
 import org.apache.ibatis.annotations.Param;
 import org.xiyoulinux.recruitment.model.po.Join;
 
+import java.util.List;
+
 public interface JoinDAO {
     int deleteByPrimaryKey(Integer id);
 
@@ -15,6 +17,12 @@ public interface JoinDAO {
     Join selectRand();
 
     Join selectByNo(String no);
+
+
+    List<Join> selectByIdsAndProcess(@Param("ids") List<Integer> ids, @Param("process_id") int process_id);
+
+
+    int maxId();
 
     int updateMobileByNo(@Param("mobile") String mobile, @Param("no") String no);
 

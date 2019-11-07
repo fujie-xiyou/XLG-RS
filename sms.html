@@ -1,0 +1,147 @@
+<html>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <title>面试通知</title>
+</head>
+<body onload="init()">
+<div style="text-align: center">
+    <h4>面试通知小工具</h4>
+    <h5>不要在QQ内置浏览器使用！</h5>
+    <h5>不要在QQ内置浏览器使用！</h5>
+    <h5>不要在QQ内置浏览器使用！</h5>
+    <hr/>
+    <div style="text-align: left; margin-left: 30px">
+        <span>你的姓名：
+            <input style="border-color: darkgrey; resize: both;"
+                   id="name"
+                   value=""
+            />
+        </span><br/>
+        <span>面试轮次：
+        <select id="process">
+            <option selected="selected" value="1">A轮面试</option>
+            <option value="0">B轮面试</option>
+            <option value="2">C轮面试</option>
+            <option value="3">D轮面试</option>
+        </select>
+        </span>
+        <button onclick="set_name()">保存</button>
+    </div>
+    <p>短信模板：</p>
+    <textarea style="border-color:black; resize: both; width: 90%; height: 100px" name="context"
+              id="context"></textarea>
+    <br/>
+    <button onclick="sms()">保存</button>&nbsp;&nbsp;&nbsp;<button onclick="reset()">重置</button>
+    <br/><br/>
+    <span style="color: red">--短信内容预览--</span>
+    <div style="color:orange" id="sms"></div>
+    <hr/>
+</div>
+<div id="list"></div>
+<script>
+    let link_symbol = '';
+    let users = ["李宇鹏", "权诗佳", "李兆龙", "周子毅", "朱文博", "杨思语", "胡庆伟", "刘婷", "吴新悦"];
+    function set_name() {
+        localStorage.name = document.getElementById("name").value;
+        localStorage.process_id = document.getElementById("process").value;
+        init();
+    }
+    function resetTab() {
+        document.getElementById('context').value = localStorage.context;
+        // console.log(joins);
+        let list = document.getElementById('list');
+        list.innerHTML = '';
+        let sms = document.getElementById('sms');
+        let context = localStorage.context;
+        let sms_id = users.indexOf(localStorage.name);
+        if (sms_id === -1)
+            return;
+        var ajax = new XMLHttpRequest();
+        //给AJAX设置事件(这里最多感知4[1-4]个状态)
+        ajax.onreadystatechange = function () {
+            //获取响应
+            //responseText		以字符串的形式接收服务器返回的信息
+            if (ajax.readyState === 4 && ajax.status === 200) {
+                let joins = eval(ajax.responseText);
+                if (joins.length <= 0)
+                    return;
+                let join = joins[0];
+                let process_str = parseProcess(localStorage.process_id);
+                sms.innerHTML = eval('(' + context + ')');
+                joins.forEach((join, index) => {
+                    list.innerHTML +=
+                        `<span style="color: orangered">`
+                        + join.time_segment
+                        + `</span> `
+                        + join.admin_class + ` `
+                        + join.cn_name
+                        + ` <a href="sms:`
+                        + join.mobile + link_symbol
+                        + `body=`
+                        + eval('(' + context + ')')
+                        + `">发短信`
+                        + `</a> <a href="tel:`
+                        + join.mobile
+                        + `">打电话</a><hr/>`;
+                });
+            }
+        };
+
+        ajax.open('get', 'http://localhost:8080/Server_war_exploded/sms?sms_id='
+            + sms_id + '&user_num=' + users.length
+            + '&process_id=' + localStorage.process_id
+        );
+        ajax.send(null);
+
+    }
+
+
+    function sms() {
+        localStorage.context = document.getElementById('context').value;
+        resetTab();
+    }
+
+    function init() {
+        // localStorage.removeItem("context");
+        if(localStorage.name == null)
+            return;
+        document.getElementById("name").value = localStorage.name;
+        document.getElementById("process").value = localStorage.process_id
+        let userAgent = navigator.userAgent;
+        if (userAgent.indexOf("Android") > -1 || userAgent.indexOf("Adr") > -1) {
+            link_symbol = "?";
+        } else if (userAgent.indexOf("iPhone") > -1) {
+            link_symbol = "&"
+        } else {
+            alert("请使用手机访问！");
+            return;
+        }
+        if (localStorage.context == null) {
+            reset();
+        } else {
+            resetTab();
+        }
+    }
+    function parseProcess(status) {
+        switch (status) {
+            case '1':
+                return "A轮面试";
+            case '0':
+                return "B轮面试";
+            case '2':
+                return "C轮面试";
+            case '3':
+                return "D轮面试";
+            default:
+                return "A轮面试"
+        }
+    }
+    function reset() {
+        localStorage.context = `join.cn_name + "同学，你好，西邮Linux兴趣小组邀请你于" + join.time_segment + "来FZ103参加小组" + process_str + "，收到请回复，来时记得带上自己的面试题，如有技术作品，可一并带上。如需更改面试时间，请回复短信说明。"`;
+
+        resetTab();
+    }
+</script>
+</body>
+</html>
