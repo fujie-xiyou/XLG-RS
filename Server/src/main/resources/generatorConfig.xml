@@ -6,7 +6,7 @@
 <generatorConfiguration>
     <!--mysql 连接数据库jar 这里选择自己本地位置-->
 
-    <classPathEntry location=":/home/fujie/.m2/repository/mysql/mysql-connector-java/8.0.11" />
+    <classPathEntry location=":/home/xuanc/.m2/repository/mysql/mysql-connector-java/8.0.11" />
 
     <context id="Mybatis3Context" targetRuntime="MyBatis3">
 

@@ -130,7 +130,7 @@ public class SignServiceImpl implements SignService {
         if (matcher.matches()) {
             int grade = Integer.parseInt(matcher.group(1));
             //TODO 超高耦合度  迟早GG
-            if (grade > 18 || grade < 17) {
+            if (grade > 19 || grade < 18) {
                 return false;
             }
         }
