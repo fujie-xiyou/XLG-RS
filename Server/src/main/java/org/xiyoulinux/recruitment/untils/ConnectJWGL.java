@@ -41,7 +41,7 @@ public class ConnectJWGL {
     // 获取csrftoken和Cookies
     private void getCsrftoken(){
         try{
-            connection = Jsoup.connect(url+ "/jwglxt/xtgl/login_slogin.html?language=zh_CN&_t="+new Date().getTime());
+            connection = Jsoup.connect(url+ "/jwglxt/xtgl/login_slogin.html");
             connection.header("User-Agent", "Mozilla/5.0 (Windows NT 6.1; WOW64; rv:29.0) Gecko/20100101 Firefox/29.0");
             response = connection.execute();
             cookies = response.cookies();
@@ -56,7 +56,7 @@ public class ConnectJWGL {
     // 获取公钥并加密密码
     private void getRSApublickey() throws Exception{
         connection = Jsoup.connect(url+ "/jwglxt/xtgl/login_getPublicKey.html?" +
-                "time="+ new Date().getTime());
+                "time="+ System.currentTimeMillis());
         connection.header("User-Agent", "Mozilla/5.0 (Windows NT 6.1; WOW64; rv:29.0) Gecko/20100101 Firefox/29.0");
         response = connection.cookies(cookies).ignoreContentType(true).execute();
         JSONObject jsonObject = JSON.parseObject(response.body());
@@ -68,7 +68,7 @@ public class ConnectJWGL {
 
     //登录
     private org.xiyoulinux.recruitment.untils.getStuInfo.ResponseResult login() throws Exception{
-        connection = Jsoup.connect(url+ "/jwglxt/xtgl/login_slogin.html");
+        connection = Jsoup.connect(url+ "/jwglxt/xtgl/login_slogin.html?language=zh_CN&_t=" + System.currentTimeMillis());
         connection.header("Content-Type","application/x-www-form-urlencoded;charset=utf-8");
         connection.header("User-Agent", "Mozilla/5.0 (Windows NT 6.1; WOW64; rv:29.0) Gecko/20100101 Firefox/29.0");
 
@@ -79,6 +79,8 @@ public class ConnectJWGL {
         connection.cookies(cookies).ignoreContentType(true)
                 .method(Connection.Method.POST).execute();
         response = connection.execute();
+        // 获取重定向后请求携带的 Cookies
+        cookies = connection.request().cookies();
         document = Jsoup.parse(response.body());
         if(document.getElementById("tips") == null){
             String data = getStudentInfo();

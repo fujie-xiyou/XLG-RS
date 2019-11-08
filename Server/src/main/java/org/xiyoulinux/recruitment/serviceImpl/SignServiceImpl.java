@@ -126,7 +126,7 @@ public class SignServiceImpl implements SignService {
 
 
     private boolean checkSnoAndPass(Join join) {
-        Matcher matcher = Pattern.compile("^[01]\\d(\\d{2})\\d{4}$").matcher(join.getStudent_no());
+        Matcher matcher = Pattern.compile("^[012]\\d(\\d{2})\\d{4}$").matcher(join.getStudent_no());
         if (matcher.matches()) {
             int grade = Integer.parseInt(matcher.group(1));
             //TODO 超高耦合度  迟早GG
