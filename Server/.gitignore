@@ -1,4 +1,7 @@
 .idea/ 
-lib/ 
+lib/
+classes/
+target/
+.Ds_Store
 *.iml 
 
